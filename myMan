@@ -1,0 +1,44 @@
+ * ____________________________________ Terminal tmn cmds
+ neofetch which
+ top        running processes
+ ncdu -x ~ to see files that will be deleted with each boot on homedir
+ dmesg
+ df -h find filesystems
+ pstree 
+ journalctl -xb -p3 # to directly see errors 
+ tldr man help
+ wipefs -f -a /dev/         delets all filesystems to repartition
+ findfs
+ libblkid       block device identification library
+ blkid          find block attributes
+ blkdiscard      selectevely wipes disk per block/sector etc 
+ dd if=/dev/zero of=/dev/sdx bs=1024 count=50       wipes partition table
+ cat /dev/zero > /dev/sdx       wipe entire disk, takes a while
+ eject
+
+nix search pkg
+nix log
+nix-build tool is used to build derivations from an expression.
+find packages $ nix search emacs
+info packages $ nix-env -qa --description '.*emacs.*'
+conf manager ? home-manager  stow  flakes
+nix search version
+nixos-version
+nix-channel
+nix-shell
+nix-rebuild
+nix-env
+nix-store 
+nix-build 
+chmod +x *.file
+touch
+git init
+ls -lah see permissions, owner, links
+echo $path
+atop in logging mode, collumn SWAPSZ (?) to see pages being swapped
+ps -e 		see all commands since boot
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+
+cp /dir/*.hek .		copy all files with .hek to this dir
