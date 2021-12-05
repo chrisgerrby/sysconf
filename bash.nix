@@ -11,8 +11,8 @@
       b = "bat -A";
       l = "exa -a --long -b --changed -U -@ --header --links";
       nrs = "sudo nixos-rebuild switch -I nixos-config=/etc/user/u/sysconf/configuration.nix";
-      nrt = "nixos-rebuild test";
-      nrb = "nixos-rebuild boot";
+      nrt = "nixos-rebuild test -I nixos-config=/etc/user/u/sysconf/configuration.nix";
+      nrb = "nixos-rebuild boot -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       srn = "shutdown -r now";
       ncg = "nix-collect-garbage";
       ncu = "nix-channel --update";
@@ -24,8 +24,8 @@
       #"exa --binary --header --long"
       #"exa --long --git"
       h = "cd ~ && exa --tree -L=3 --long";
-      c = "cd /etc/nixos && exa --long -B --header";
-      ce = "vim /etc/nixos/configuration.nix";
+      c = "cd /etc/user/u/sysconf && exa --long -B --header";
+      ce = "vim /etc/user/u/sysconf/configuration.nix";
       ".." = "cd .. && exa --tree -L=1 --header";
     };
   };
