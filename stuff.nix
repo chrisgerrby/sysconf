@@ -352,6 +352,9 @@ info sources
          if  programs look elwhere than in ~./    or    /etc/<NAME>.    then link it. 
           stepwise::: (1) put conf in /etc/nixos, (2) use environment.etc.<name>. to put it in /etc/  )
  
+###### controlling os from 
+https://discourse.nixos.org/t/adding-folders-and-scripts/5114 
+######
 
 ###   runs command on boot
  {

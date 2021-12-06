@@ -1,30 +1,7 @@
-{ with pkgs ? <nixpkgs> {}; }: {
-
-# { pkgs, ... }:
-# {
-#   environment.variables = { EDITOR = "vim"; };
-# 
-#   environment.systemPackages = with pkgs; [
-#     (neovim.override {
-#       vimAlias = true;
-#       configure = {
-#         packages.myPlugins = with pkgs.vimPlugins; {
-#           start = [ vim-lastplace vim-nix ]; 
-#           opt = [];
-#         };
-#         customRC = ''
-#           " your custom vimrc
-#           set nocompatible
-#           set backspace=indent,eol,start
-#           " ...
-#         '';
-#       };
-#     }
-#   )];
-# }
+with import <nixpkgs> {};
 
 vim_configurable.customize {
-  name = "vim";
+  name = "myvim";
   vimrcConfig.customRC = ''
     set hidden
     set colorcolumn=80 
@@ -107,6 +84,4 @@ vim_configurable.customize {
     # 	" Vim with all enhancements
     # 	" source $VIMRUNTIME/vimrc_example.vim
   '';
-  };
 }
-

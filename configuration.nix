@@ -11,7 +11,8 @@
   #   ./i3.nix
 #     ./resolution.nix
       ./bash.nix
-      ./sxhkd.nix
+      ./sxhkd.nix 
+      ./xbindkeys.nix
       ./hardware-configuration.nix
       <nixos-hardware/microsoft/surface>
   ];
@@ -97,7 +98,7 @@
     layout = "us";
     enable = true;
     autoRepeatDelay = 200; 
-    autoRepeatInterval = 25;
+    autoRepeatInterval = 45;
 
     desktopManager.gnome.enable = true;
     desktopManager.xfce.enable = false;
@@ -180,6 +181,7 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
+    (import ./vim.nix)
     vivaldi #chromiumBeta google-chrome-beta google-chrome
     nyxt qutebrowser firefox links2 
     fontmatrix
@@ -187,13 +189,24 @@
     zathura
     git git-crypt gnupg pinentry_qt pinentry-curses
     adguardhome bitwarden monero-gui
-    sxhkd entr tmux tldr maim 
+    entr tmux tldr maim 
     fzf bat exa ripgrep-all ripgrep
     xclip copyq parcellite 
-    xbindkeys
+    sxhkd xbindkeys
     
     #ananmesis
-
+    
+    ####### automation
+    # inotify-tools
+    # pyinotify – high-level Python interface to inotify, makes it very easy to write Python based scripts for watching files.
+    # IWatch – simple Perl script using inotify to watch files and directories, sending notifications of file changes by e-mail.
+    # incron – inotify cron-like system; run commands when certain filesystem events occur.
+    # logsend – daemon for e-mail notification of log file changes. Its inotify backend uses inotify-tools.
+    # mswatch – keeps Unix mailboxes synchronized using inotify (or dnotify on older kernels).
+    # inotail – a version of the tail utility which uses inotify to avoid polling for changes.
+    # notitools – some useful inotify tools.
+    # adhocify – can launch scripts upon inotify events. requires no config files.
+    
 #   xlib.webcollage # decorate the screen with random images from the web
 #   xlib.xwininfo # window information utility for X
 #   xlib.xprop # property displayer for X
@@ -228,12 +241,13 @@
     killall # kills process by name
     udevil # mount fs w/o pw
 
+     unzip
      kitty putty cool-retro-term      mpv mps-youtube youtube-dl
      ranger
      sxiv
      aria2 rtorrent
      nix-prefetch-github nix-index nix-prefetch-scripts
-     neovim vim #(import ./vim.nix)
+     neovim vim vim_configurable #(import ./vim.nix)
   ];
 
  # disable files 
@@ -250,12 +264,12 @@
 
   environment.variables = {
     #PAGER = "bat -A";
-		EDITOR = "vim";
+    EDITOR = "myvim";
     VISUAL = "vim";
-		BROWSER = "vivaldi";
-		TERMINAL = "cool-retro-term";
-		#FILE = 
-		RUST_BACKTRACE = "1";
+    BROWSER = "vivaldi";
+    TERMINAL = "cool-retro-term";
+    #FILE = 
+    RUST_BACKTRACE = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
