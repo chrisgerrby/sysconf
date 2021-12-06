@@ -2,16 +2,16 @@
 { config, pkgs, lib, callPackage, ... }: {
 
   imports = [
-      #./home-manager.nix
- #     ./sway.nix
- #     ./sxhkd.nix
-      #./vim is in system
-      #./emacs.nix
- #     ./nyxt.nix
-#      ./surfaceBook2.nix
-  #    ./i3.nix
+     #./home-manager.nix
+ #    ./sway.nix
+     #./vim is in system
+     #./emacs.nix
+ #    ./nyxt.nix
+#     ./surfaceBook2.nix
+  #   ./i3.nix
+#     ./resolution.nix
       ./bash.nix
-#      ./resolution.nix
+      ./sxhkd.nix
       ./hardware-configuration.nix
       <nixos-hardware/microsoft/surface>
   ];
@@ -187,11 +187,11 @@
     zathura
     git git-crypt gnupg pinentry_qt pinentry-curses
     adguardhome bitwarden monero-gui
-    sxhkd entr tmux tldr 
+    sxhkd entr tmux tldr maim 
     fzf bat exa ripgrep-all ripgrep
     xclip copyq parcellite 
     xbindkeys
-    maim
+    
     #ananmesis
 
 #   xlib.webcollage # decorate the screen with random images from the web
@@ -290,13 +290,5 @@
     enable = true;
     pinentryFlavor = "gtk2"; # gnome3 qt gtk2
   };
-#    programs.gpg = {
-#      enable = true;
-#    };
-#   
-#    services.gpg-agent = {
-#      enable = true; 
-#      pinentryFlavor = "qt";
-#    };
 
 }

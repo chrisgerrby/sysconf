@@ -1,18 +1,11 @@
 { config, pkgs, lib, ... }: {
 
-environment.etc."/etc/user/u/.config/sxhkd".text =
-  ''
+environment.etc."/user/u/.config/sxhkd/sxhkdrc".text = ''
 
-super + return
-    i3 alacritty
+  super + space
+    kitty 
 
-super + space
-    alacritty
-
-super + e
+  super + e
     ranger
-
-
-
   '';
 }
