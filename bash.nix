@@ -2,7 +2,7 @@
   programs.bash = {
     enableCompletion = true;
     shellAliases = {
-      v = "myvim";
+      v = "vim";
       s = "sudo su";
       r = "ranger";
       m = "man";

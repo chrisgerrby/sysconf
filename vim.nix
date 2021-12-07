@@ -1,7 +1,7 @@
 with import <nixpkgs> {};
 
 vim_configurable.customize {
-  name = "myvim";
+  name = "vim";
   vimrcConfig.customRC = ''
     set hidden
     set colorcolumn=80 
@@ -30,7 +30,6 @@ vim_configurable.customize {
     set smartcase
     set nowrap
     set encoding=utf-8
-    set background=black
     set linenumber
     set modeline
     set ruler

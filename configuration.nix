@@ -4,12 +4,12 @@
   imports = [
      #./home-manager.nix
  #    ./sway.nix
-     #./vim is in system
      #./emacs.nix
  #    ./nyxt.nix
 #     ./surfaceBook2.nix
   #   ./i3.nix
 #     ./resolution.nix
+      ./myvim.nix
       ./bash.nix
       ./sxhkd.nix 
       ./xbindkeys.nix
@@ -181,7 +181,8 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
-    (import ./vim.nix)
+    spotify
+    #mathematica
     vivaldi #chromiumBeta google-chrome-beta google-chrome
     nyxt qutebrowser firefox links2 
     fontmatrix
@@ -264,10 +265,11 @@
 
   environment.variables = {
     #PAGER = "bat -A";
-    EDITOR = "myvim";
-    VISUAL = "vim";
+    EDITOR = "neovim";
+    VISUAL = "neovim";
     BROWSER = "vivaldi";
-    TERMINAL = "cool-retro-term";
+    TERMINAL = "kitty";
+    #TERMINAL = "cool-retro-term";
     #FILE = 
     RUST_BACKTRACE = "1";
   };
