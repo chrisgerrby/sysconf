@@ -181,7 +181,7 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
-    spotify
+    spotify-tui spotify
     #mathematica
     vivaldi #chromiumBeta google-chrome-beta google-chrome
     nyxt qutebrowser firefox links2 
@@ -265,8 +265,8 @@
 
   environment.variables = {
     #PAGER = "bat -A";
-    EDITOR = "neovim";
-    VISUAL = "neovim";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
     BROWSER = "vivaldi";
     TERMINAL = "kitty";
     #TERMINAL = "cool-retro-term";

@@ -2,14 +2,14 @@
   programs.bash = {
     enableCompletion = true;
     shellAliases = {
-      v = "vim";
+      v = "nvim";
       s = "sudo su";
       r = "ranger";
       m = "man";
       f = "fzf --preview 'bat --color=always --style=numbers --line-range=:1000'";
       b = "bat -A";
       l = "exa -a --long -b --changed -U -@ --header"; # --links
-      g = "./gitAutoPush.sh";
+      g = "/etc/user/u/sysconf/gitAutoPush.sh";
       nrs = "sudo nixos-rebuild switch -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrt = "nixos-rebuild test -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrb = "nixos-rebuild boot -I nixos-config=/etc/user/u/sysconf/configuration.nix";
