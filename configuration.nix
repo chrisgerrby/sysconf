@@ -97,8 +97,8 @@
     #autorun = true;
     layout = "us";
     enable = true;
-    autoRepeatDelay = 200; 
-    autoRepeatInterval = 45;
+    autoRepeatDelay = 200; #  milliseconds that a key must be before autorepeat starts
+    autoRepeatInterval = 70; # time between autorepeat-generated keystokes
 
     desktopManager.gnome.enable = true;
     desktopManager.xfce.enable = false;
@@ -181,6 +181,7 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
+    alacritty
     spotify-tui spotify
     #mathematica
     vivaldi #chromiumBeta google-chrome-beta google-chrome
