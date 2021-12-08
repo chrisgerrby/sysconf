@@ -92,6 +92,14 @@
     '';
    };
 
+#   toggle between us, it keyboardlayout on !SPACE
+#   services.xserver = {
+#    exportConfiguration = true; # link /usr/share/X11/ properly
+#      enable = true;
+#      layout = "us,it";
+#      xkbOptions = "eurosign:e, compose:menu, grp:alt_space_toggle";
+#    };
+
   services.xserver = {
     #	startx.enable = true;
     #autorun = true;
@@ -181,6 +189,7 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
+    neovim vim vim_configurable #(import ./vim.nix)
     alacritty
     spotify-tui spotify
     #mathematica
@@ -221,14 +230,12 @@
 
     usbutils pciutils util-linux 
     sysstat busybox toybox
-
     pstree #trace
     htop # active processes
     ncdu # disk usage
     #tail
     #slabtop # mem usag
     #readlink # read value of a symbolic link
-
     lsof #list open files
     #lsusb # list USB devices
 #    lsmod # program to show the status of modules in the Linux Kernel
@@ -239,17 +246,16 @@
   #  iostat # disk, cpu, network
   #  ltrace # A library call tracer
   #  glxinfo # gpu info
-
     killall # kills process by name
     udevil # mount fs w/o pw
 
      unzip
-     kitty putty cool-retro-term      mpv mps-youtube youtube-dl
+     kitty putty cool-retro-term      
+     mpv mps-youtube youtube-dl
      ranger
      sxiv
      aria2 rtorrent
      nix-prefetch-github nix-index nix-prefetch-scripts
-     neovim vim vim_configurable #(import ./vim.nix)
   ];
 
  # disable files 
@@ -302,7 +308,6 @@
   system.stateVersion = "21.11"; # Did you read the comment?
 
   services.pcscd.enable = true;
-
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "gtk2"; # gnome3 qt gtk2
