@@ -204,6 +204,7 @@
     fzf bat exa ripgrep-all ripgrep
     xclip copyq parcellite 
     sxhkd xbindkeys xvkbd
+    xdotool
     
     #ananmesis
     

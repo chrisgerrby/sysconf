@@ -2,13 +2,31 @@
 
 environment.etc."/user/u/.xbindkeysrc".text = ''
 
-# /  Åå
+###########################################################################################
+
+# shift numberpad / Å
+"printf '\xE2\x98\xA0'"
   KP_Divide
-# * Ää
+
+# numberpad / å
+  KP_Divide
+
+# shift numberpad * Ä
   KP_Multiply
-# - Öö
-"xvkbd -no-jump-pointer -xsendevent -text 'ö'"
-  KP_Subtract
+
+# numberpad * ä
+  KP_Multiply
+
+# numberpad - ö
+# works, but takes a half fucking second to print
+"xdotool key U00F6" #
+  KP_Subtract #+ Release
+
+# shift numberpad - Ö
+# "xvkbd -xsendevent -text 'ö'"
+#   KP_Subtract
+
+###########################################################################################
 
 # open file 
 #"xdg-open ~/sysconf/configuration.nix"
