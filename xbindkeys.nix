@@ -2,12 +2,12 @@
 
 environment.etc."/user/u/.xbindkeysrc".text = ''
 
-# /
-"alacritty"
+# /  Åå
   KP_Divide
-# *
+# * Ää
   KP_Multiply
-# -
+# - Öö
+"xvkbd -no-jump-pointer -xsendevent -text 'ö'"
   KP_Subtract
 
 # open file 
