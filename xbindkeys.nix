@@ -1,28 +1,15 @@
 { config, pkgs, lib, ...}: {
 
-environment.etc."/users/u/.xbindkeysrc".text = ''
+environment.etc."/user/u/.xbindkeysrc".text = ''
 
 
+# open file 
+xdg-open ~/sysconf/configuration.nix
+F7
 
-
-# For the benefit of emacs users: -*- shell-script -*-
-###########################
-# xbindkeys configuration #
-###########################
-#
-# Version: 1.8.7
-#
-# If you edit this file, do not forget to uncomment any lines
-# that you change.
-# The pound(#) symbol may be used anywhere for comments.
-#
-# To specify a key, you can use 'xbindkeys --key' or
-# 'xbindkeys --multikey' and put one of the two lines in this file.
-#
 # The format of a command line is:
 #    "command to start"
 #       associated key
-#
 #
 # A list of keys is in /usr/include/X11/keysym.h and in
 # /usr/include/X11/keysymdef.h
@@ -78,8 +65,5 @@ environment.etc."/users/u/.xbindkeysrc".text = ''
 
 
 
-
-
   '';
-
 }
