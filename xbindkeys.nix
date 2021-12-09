@@ -2,11 +2,17 @@
 
 environment.etc."/user/u/.xbindkeysrc".text = ''
 
-
+# /
+"alacritty"
+  KP_Divide
+# *
+  KP_Multiply
+# -
+  KP_Subtract
 
 # open file 
 #"xdg-open ~/sysconf/configuration.nix"
-firefox
+"firefox"
   m:0x0 + c:73
 
 # The format of a command line is:
@@ -60,12 +66,6 @@ firefox
 ## Control + mouse button 2 release event starts rxvt
 #"rxvt"
 #  Control + b:2 + Release
-
-##################################
-# End of xbindkeys configuration #
-##################################
-
-
 
   '';
 }
