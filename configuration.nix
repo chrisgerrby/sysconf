@@ -203,7 +203,7 @@
     entr tmux tldr maim 
     fzf bat exa ripgrep-all ripgrep
     xclip copyq parcellite 
-    sxhkd xbindkeys
+    sxhkd xbindkeys xvkbd
     
     #ananmesis
     
