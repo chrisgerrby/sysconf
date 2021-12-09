@@ -2,10 +2,9 @@
 
 environment.etc."/user/u/.xbindkeysrc".text = ''
 
-
 # open file 
-xdg-open ~/sysconf/configuration.nix
-F7
+"xdg-open ~/sysconf/configuration.nix"
+  F7
 
 # The format of a command line is:
 #    "command to start"
