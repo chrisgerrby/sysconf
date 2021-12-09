@@ -2,8 +2,11 @@
 
 environment.etc."/user/u/.xbindkeysrc".text = ''
 
+
+
 # open file 
-"xdg-open ~/sysconf/configuration.nix"
+#"xdg-open ~/sysconf/configuration.nix"
+firefox
   m:0x0 + c:73
 
 # The format of a command line is:
