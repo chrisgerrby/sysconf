@@ -189,6 +189,7 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
+    p3x-onenote standardnotes
     neovim vim vim_configurable #(import ./vim.nix)
     alacritty
     spotify-tui spotify
