@@ -1,5 +1,19 @@
 # man configuration.nix
-{ config, pkgs, lib, callPackage, ... }: {
+{ config, pkgs, lib, callPackage, ... }:
+let
+	
+ #  Spotify is terrible on hidpi screens (retina, 4k); this small wrapper
+ # passes a command-line flag to force better scaling.
+       spotify-4k = pkgs.symlinkJoin {
+           name = "spotify";
+           paths = [ pkgs.spotify ];
+           nativeBuildInputs = [ pkgs.makeWrapper ];
+           postBuild = ''
+		   wrapProgram $out/bin/spotify \
+		   --add-flags "--force-device-scale-factor=1.8"
+  	     '';
+	 };	
+in {
 
   imports = [
      #./home-manager.nix
@@ -9,6 +23,7 @@
 #     ./surfaceBook2.nix
   #   ./i3.nix
 #     ./resolution.nix
+      #./spotify.nix
       ./myvim.nix
       ./bash.nix
       ./sxhkd.nix 
@@ -189,16 +204,16 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
-    p3x-onenote standardnotes
+    neofetch
+    #p3x-onenote standardnotes # bwrap 
     neovim vim vim_configurable #(import ./vim.nix)
-    alacritty
-    spotify-tui spotify
+    spotify-4k spotify-tui
     #mathematica
     vivaldi #chromiumBeta google-chrome-beta google-chrome
     nyxt qutebrowser firefox links2 
     fontmatrix
     android-file-transfer
-    zathura
+    zathura mupdf # search for pdf in packages :)
     git git-crypt gnupg pinentry_qt pinentry-curses
     adguardhome bitwarden monero-gui
     entr tmux tldr maim 
@@ -250,9 +265,8 @@
   #  glxinfo # gpu info
     killall # kills process by name
     udevil # mount fs w/o pw
-
      unzip
-     kitty putty cool-retro-term      
+     alacritty kitty putty cool-retro-term      
      mpv mps-youtube youtube-dl
      ranger
      sxiv
