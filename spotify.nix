@@ -13,5 +13,5 @@ spotify-4k = pkgs.symlinkJoin {
   };
 
 in {
-environment.systemPackages = [ 4k-spotify ]
-};
+environment.systemPackages = [ spotify-4k ];
+}

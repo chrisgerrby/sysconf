@@ -10,7 +10,7 @@
       b = "bat -A";
       l = "exa -a --long -b --changed -U -@ --header"; # --links
       g = "/etc/user/u/sysconf/gitAutoPush.sh";
-      nrs = "sudo nixos-rebuild switch -I nixos-config=/etc/user/u/sysconf/configuration.nix";
+      nrs = "sudo nixos-rebuild switch -Iv nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrt = "nixos-rebuild test -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrb = "nixos-rebuild boot -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       srn = "shutdown -r now";

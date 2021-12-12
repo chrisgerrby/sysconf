@@ -1,29 +1,28 @@
 # man configuration.nix
-{ config, pkgs, lib, callPackage, ... }:
-let
-	
- #  Spotify is terrible on hidpi screens (retina, 4k); this small wrapper
- # passes a command-line flag to force better scaling.
-       spotify-4k = pkgs.symlinkJoin {
-           name = "spotify";
-           paths = [ pkgs.spotify ];
-           nativeBuildInputs = [ pkgs.makeWrapper ];
-           postBuild = ''
-		   wrapProgram $out/bin/spotify \
-		   --add-flags "--force-device-scale-factor=1.8"
-  	     '';
-	 };	
-in {
+{ config, pkgs, lib, callPackage, ... }: 
+
+ let
+    spotify-4k = pkgs.symlinkJoin {
+      name = "spotify";
+      paths = [ pkgs.spotify ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/spotify \
+        --add-flags "--force-device-scale-factor=1.8"
+        '';
+      };	
+
+ in { 
 
   imports = [
-     #./home-manager.nix
- #    ./sway.nix
-     #./emacs.nix
- #    ./nyxt.nix
+#     ./home-manager.nix
+#     ./sway.nix
+#     ./emacs.nix
+#     ./nyxt.nix
 #     ./surfaceBook2.nix
-  #   ./i3.nix
+#     ./i3.nix
 #     ./resolution.nix
-      #./spotify.nix
+#     ./spotify.nix
       ./myvim.nix
       ./bash.nix
       ./sxhkd.nix 
@@ -120,7 +119,7 @@ in {
     #autorun = true;
     layout = "us";
     enable = true;
-    autoRepeatDelay = 200; #  milliseconds that a key must be before autorepeat starts
+    autoRepeatDelay = 500; #  milliseconds that a key must be before autorepeat starts
     autoRepeatInterval = 70; # time between autorepeat-generated keystokes
 
     desktopManager.gnome.enable = true;
@@ -204,8 +203,7 @@ in {
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
-    neofetch
-    #p3x-onenote standardnotes # bwrap 
+    #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     neovim vim vim_configurable #(import ./vim.nix)
     spotify-4k spotify-tui
     #mathematica
@@ -292,7 +290,6 @@ in {
     VISUAL = "nvim";
     BROWSER = "vivaldi";
     TERMINAL = "kitty";
-    #TERMINAL = "cool-retro-term";
     #FILE = 
     RUST_BACKTRACE = "1";
   };
