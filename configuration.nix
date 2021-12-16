@@ -28,7 +28,6 @@
       ./sxhkd.nix 
       ./xbindkeys.nix
       ./hardware-configuration.nix
-      <nixos-hardware/microsoft/surface>
   ];
   
   ###################### hardware ###################### 
@@ -43,13 +42,30 @@
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
   powerManagement.cpuFreqGovernor = "ondemand";
 
-  ######################## surface ###################
-  #
+  ######################## SB2 ###################
+  ### schreen-hang  https://discourse.nixos.org/t/my-nixos-laptop-often-freezes/6381/4
   # https://git.ophanim.de/derped/nixos/src/commit/1424945b7df8698bbd2e256c48bf5d12c157513a/machines/Lilim/hardware-configuration.nix
   # https://github.com/NixOS/nixos-hardware/tree/master/microsoft/surface
   # https://github.com/linux-surface/linux-surface/wiki/Utilities-and-Packages
   hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
   hardware.cpu.intel.updateMicrocode = true; 
+  # 1 beg
+  # imports = [ <nixos-hardware/microsoft/surface> ]       
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  nixpkgs.config.packageOverrides = pkgs: {
+        vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+      };
+      hardware.opengl = {
+        enable = true;
+        extraPackages = with pkgs; [
+          vaapiIntel
+          vaapiVdpau
+          libvdpau-va-gl
+          intel-media-driver
+        ];
+      };
+  # 1 end
+  # boot.kernelPackages = pkgs.linuxPackages_4_19;
   # boot.kernelPackages = [ surface ];
   # extra kernel modules must match kernel version
   # boot.extraModulePackages = with config.boot.kernelPackages; [ ];
