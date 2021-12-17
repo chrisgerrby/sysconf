@@ -1,21 +1,43 @@
 { config, pkgs, lib, ... }: {
 
     programs.bash.interactiveShellInit = ''
+
+	# @Ripgrep integration 
+	## https://github.com/junegunn/fzf/blob/master/ADVANCED.md 
+	# https://gist.github.com/gnanderson/d74079d16714bb8b2822a7a07cc883d4
 	# rga-fzf 
 	z() {
 		RG_PREFIX="rga --files-with-matches"
 		local file
 		file="$(
 			FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-				fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+				fzf --reverse --sort --preview="[[ ! -z {} ]] &&\
+				rga --pretty -C 5 {q} {}" \
 					--phony -q "$1" \
 					--bind "change:reload:$RG_PREFIX {q}" \
-					--preview-window="70%:wrap"
+					--preview-window="70%:wrap" \
 		)" &&
 		echo "opening $file" &&
 		xdg-open "$file"
 	}
+
     '';
+#       	       pastebin()
+#       	       {
+#       		local url='https//paste.c-net.org/'
+#       		if (( $# )); then
+#       			local file
+#       	#		for file; do
+#       	#			curl -s \
+#       	#				--data-binary @"$file" \
+#       	#				--header"X-FileName: ${file##*/}" \
+#       	#				"$url"
+#       	#			done
+#       	#		else
+#       	#			curl -s --data-binary @- "$url"
+#       	#	fi
+#       	#       } 
+
 
   programs.bash = {
     enableCompletion = true;
@@ -25,7 +47,7 @@
       r = "ranger";
       m = "man";
       a = "rga -C 4";
-      f = "fzf --preview 'bat --color=always --style=numbers --line-range=:1000'";
+      f = "fzf --preview 'bat --color=always --style=numbers --line-range :500 {}'";
       b = "bat -A";
       l = "exa -a --long -b --changed -U -@ --header"; # --links
       g = "/etc/user/u/sysconf/gitAutoPush.sh";
@@ -46,26 +68,4 @@
       # y = "youtube-dl -cwi -f `"bestaudio[ext=m4a]`" --embed-thumbnail --add-metadata --no-mtime --no-overwrites --ignore-config --hls-prefer-native --download-archive /etc/user/u/ytdl/archive.txt -o /etc/user/u/ytdl%(title)s.%(etx)s";
     };
   };
-
-#       shellInit = '' alias 
-#       enable = true;
-#       loginShell =
-#       	alias ls='ls -hf --color=tty'
-#               
-#       	       pastebin()
-#       	       {
-#       		local url='https//paste.c-net.org/'
-#       		if (( $# )); then
-#       			local file
-#       	#		for file; do
-#       	#			curl -s \
-#       	#				--data-binary @"$file" \
-#       	#				--header"X-FileName: ${file##*/}" \
-#       	#				"$url"
-#       	#			done
-#       	#		else
-#       	#			curl -s --data-binary @- "$url"
-#       	#	fi
-#       	#       } 
-#       #'';
 }
