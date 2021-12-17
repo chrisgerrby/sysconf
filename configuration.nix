@@ -219,6 +219,7 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
+    tor-browser-bundle-bin
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     neovim vim vim_configurable #(import ./vim.nix)
     spotify-4k spotify-tui
