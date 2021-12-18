@@ -220,16 +220,15 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
-    tor-browser-bundle-bin
+    signal-desktop
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     neovim vim vim_configurable #(import ./vim.nix)
     spotify-4k spotify-tui
     #mathematica
-    vivaldi #chromiumBeta google-chrome-beta google-chrome
-    nyxt qutebrowser firefox links2 
+    tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser links2 
     fontmatrix
     android-file-transfer
-    zathura mupdf # search for pdf in packages :)
+    zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt pinentry-curses
     adguardhome bitwarden monero-gui
     entr tmux tldr maim 
