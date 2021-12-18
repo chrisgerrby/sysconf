@@ -28,8 +28,9 @@
       ./sxhkd.nix 
       ./xbindkeys.nix
       ./hardware-configuration.nix
+      ./mullvad.nix
   ];
-  
+
   ###################### hardware ###################### 
   fileSystems."/" = { 
     device = "/dev/disk/by-label/nixos";
