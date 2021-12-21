@@ -136,7 +136,7 @@
     #autorun = true;
     layout = "us";
     enable = true;
-    autoRepeatDelay = 500; #  milliseconds that a key must be before autorepeat starts
+    autoRepeatDelay = 2000; #  milliseconds that a key must be before autorepeat starts
     autoRepeatInterval = 70; # time between autorepeat-generated keystokes
 
     desktopManager.gnome.enable = true;
@@ -220,12 +220,13 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ 
-    signal-desktop
+    signal-desktop anki
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     neovim vim vim_configurable #(import ./vim.nix)
     spotify-4k spotify-tui
     #mathematica
-    tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser links2 
+    tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser 
+    links2 
     fontmatrix
     android-file-transfer
     zathura # mupdf search for pdf in packages :)

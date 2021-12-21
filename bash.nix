@@ -54,6 +54,7 @@
       nrs = "sudo nixos-rebuild switch -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrt = "nixos-rebuild test -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrb = "nixos-rebuild boot -I nixos-config=/etc/user/u/sysconf/configuration.nix";
+      sn = "shutdown now";
       srn = "shutdown -r now";
       ncg = "nix-collect-garbage";
       ncu = "nix-channel --update";
