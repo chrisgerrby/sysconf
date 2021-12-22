@@ -1,5 +1,5 @@
 # man configuration.nix
-{ config, pkgs, lib, callPackage, ... }: 
+{ config, pkgs, lib, callPackage, ... }:
 
  let
     spotify-4k = pkgs.symlinkJoin {
@@ -10,9 +10,9 @@
         wrapProgram $out/bin/spotify \
         --add-flags "--force-device-scale-factor=1.8"
         '';
-      };	
+      };
 
- in { 
+ in {
 
   imports = [
 #     ./home-manager.nix
@@ -25,18 +25,18 @@
       ./emacs.nix
       ./myvim.nix
       ./bash.nix
-      ./sxhkd.nix 
+      ./sxhkd.nix
       ./xbindkeys.nix
       ./hardware-configuration.nix
       ./mullvad.nix
   ];
 
-  ###################### hardware ###################### 
-  fileSystems."/" = { 
+  ###################### hardware ######################
+  fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
   };
-  fileSystems."/boot" = { 
+  fileSystems."/boot" = {
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
@@ -49,9 +49,9 @@
   # https://github.com/NixOS/nixos-hardware/tree/master/microsoft/surface
   # https://github.com/linux-surface/linux-surface/wiki/Utilities-and-Packages
   hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
-  hardware.cpu.intel.updateMicrocode = true; 
+  hardware.cpu.intel.updateMicrocode = true;
   # 1 beg
-  # imports = [ <nixos-hardware/microsoft/surface> ]       
+  # imports = [ <nixos-hardware/microsoft/surface> ]
   boot.kernelPackages = pkgs.linuxPackages_latest;
   nixpkgs.config.packageOverrides = pkgs: {
         vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
@@ -74,7 +74,7 @@
   # boot.kernelParams = [ ];
 
 
-  # kernel runtime parameters 
+  # kernel runtime parameters
   # see all via syscty -
   boot.kernel.sysctl =  {
     #"net.ipv4.tcp_syncookies" = false;
@@ -82,41 +82,41 @@
     "kernel.sysrq" = 1;
   };
 
- # https://github.com/linux-surface/surface-aggregator-module/wiki/Testing-and-Installing 
- # CONFIG_SERIAL_DEV_BUS=y CONFIG_SERIAL_DEV_CTRL_TTYPORT=yi needs to be set, 
+ # https://github.com/linux-surface/surface-aggregator-module/wiki/Testing-and-Installing
+ # CONFIG_SERIAL_DEV_BUS=y CONFIG_SERIAL_DEV_CTRL_TTYPORT=yi needs to be set,
  ## is set via nixos
 
   #suspend if powerbutton his bumped, rather than shutdown.
   services.logind.lidSwitch = "ignore";
   services.logind.extraConfig = ''
     HandlePowerKey=suspend
-  ''; 
+  '';
 
  # included surface-control # allowing control of the dGPU
-  
-  ################# init boot kernel #################### 
+
+  ################# init boot kernel ####################
   boot.loader.systemd-boot.enable = true;
   #boot.loader.timeout = null;
   boot.loader.efi.canTouchEfiVariables = true;
-  #boot.loader.systemd-boot.consoleMode =  "max"; 
+  #boot.loader.systemd-boot.consoleMode =  "max";
 
   #   services.getty = {
-  #  	greetingLine = lib.mkForce "Welcome, u!"; 
-  #  	helpLine = lib.mkForce ""; 
-  #  	}; 
+  #  	greetingLine = lib.mkForce "Welcome, u!";
+  #  	helpLine = lib.mkForce "";
+  #  	};
 
-  nixpkgs.config = { 
+  nixpkgs.config = {
 	allowBroken = true;
- 	allowUnfree = true; 
+ 	allowUnfree = true;
 
 	#chromium = { chromium.enableWideVine = true; };
   };
 
-  nix = { 
+  nix = {
     gc.automatic = true;
     gc.dates = "weekly";
     gc.options = "--delete-older-than 30d";
-    autoOptimiseStore = true; 
+    autoOptimiseStore = true;
     extraOptions = ''
       min-free = ${toString (100 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
@@ -143,25 +143,25 @@
     desktopManager.xfce.enable = false;
     #desktopManager.xfce.noDesktop = true;
     #desktopManager.xfce.enableXfwm = false;
-    
+
     desktopManager.xterm.enable = false;
 
     # allowing displayManagers to automatically choose this session
     # adding a session for a display manager to choose
-    # displaymanager.session = { }; 
-    #displayManager.defaultSession = "none+i3"; 
+    # displaymanager.session = { };
+    #displayManager.defaultSession = "none+i3";
 
-    displayManager.lightdm.enable = true; 
+    displayManager.lightdm.enable = true;
     displayManager.lightdm.greeter.enable = true;
 
-    displayManager.autoLogin.enable = false; 
-    #displayManager.autoLogin.user = "u"; 
+    displayManager.autoLogin.enable = false;
+    #displayManager.autoLogin.user = "u";
 
     #windowManager.bspwm.configFile = "/etc/nixos/bspwm";
     #windowManager.bspwm.sxhkd.configFile = "/etc/nixos/sxhkd";
     libinput.enable = true;
     #config = '' ''; # misc
-    #extraConfig = '' ''; 
+    #extraConfig = '' '';
   };
 
   # not for alacritty
@@ -184,7 +184,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   # console = {  keyMap = "us"; };
 
-  # services.printing.enable = true; # Enable CUPS to print documents. 
+  # services.printing.enable = true; # Enable CUPS to print documents.
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -204,7 +204,7 @@
 
   fonts.fonts = with pkgs; [
     # noto-fonts    noto-fonts-cjk    noto-fonts-emoji
-    fira-code    fira-code-symbols    
+    fira-code    fira-code-symbols
     font-awesome-ttf
     iosevka
     freetype dejavu_fonts
@@ -219,27 +219,25 @@
 #  services.usbguard.enable = true;
 #  services.apcupsd.enable = true;
 
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     signal-desktop anki
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     neovim vim vim_configurable #(import ./vim.nix)
     spotify-4k spotify-tui
     #mathematica
-    tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser 
-    links2 
+    tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser
+    links2
     fontmatrix
     android-file-transfer
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt pinentry-curses
     adguardhome bitwarden monero-gui
-    entr tmux tldr maim 
+    entr tmux tldr maim
     fzf bat exa ripgrep-all ripgrep
-    xclip copyq parcellite 
+    xclip copyq parcellite
     sxhkd xbindkeys xvkbd
     xdotool
-    
     #ananmesis
-    
     ####### automation
     # inotify-tools
     # pyinotify – high-level Python interface to inotify, makes it very easy to write Python based scripts for watching files.
@@ -250,18 +248,15 @@
     # inotail – a version of the tail utility which uses inotify to avoid polling for changes.
     # notitools – some useful inotify tools.
     # adhocify – can launch scripts upon inotify events. requires no config files.
-    
 #   xlib.webcollage # decorate the screen with random images from the web
 #   xlib.xwininfo # window information utility for X
 #   xlib.xprop # property displayer for X
 #   xlib.xdpyinfo # display information utility for X
 #   xlib.xosview # X based system monitor
 #   xlib.xrestop # monitor server resources used by X11 clients
-
     aspell
     aspellDicts.en
-
-    usbutils pciutils util-linux 
+    usbutils pciutils util-linux
     sysstat busybox toybox
     pstree #trace
     htop # active processes
@@ -282,15 +277,13 @@
     killall # kills process by name
     udevil # mount fs w/o pw
      unzip
-     alacritty kitty putty cool-retro-term      
+     alacritty kitty putty cool-retro-term
      mpv mps-youtube youtube-dl
-     ranger
-     sxiv
-     aria2 rtorrent
+     ranger sxiv aria2 rtorrent
      nix-prefetch-github nix-index nix-prefetch-scripts
   ];
 
- # disable files 
+ # disable files
  # environment.etc."/usr/include/X11/keysymdef.h".text
 
 #  environment.sessionVariables = rec {
@@ -308,7 +301,7 @@
     VISUAL = "emacs";
     BROWSER = "vivaldi";
     TERMINAL = "kitty";
-    #FILE = 
+    #FILE =
     RUST_BACKTRACE = "1";
   };
 
