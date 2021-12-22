@@ -17,12 +17,12 @@
   imports = [
 #     ./home-manager.nix
 #     ./sway.nix
-#     ./emacs.nix
 #     ./nyxt.nix
 #     ./surfaceBook2.nix
 #     ./i3.nix
 #     ./resolution.nix
 #     ./spotify.nix
+      ./emacs.nix
       ./myvim.nix
       ./bash.nix
       ./sxhkd.nix 
@@ -304,8 +304,8 @@
 
   environment.variables = {
     #PAGER = "bat -A";
-    EDITOR = "nvim";
-    VISUAL = "nvim";
+    EDITOR = "emacs";
+    VISUAL = "emacs";
     BROWSER = "vivaldi";
     TERMINAL = "kitty";
     #FILE = 
