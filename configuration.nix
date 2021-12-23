@@ -31,7 +31,6 @@
       ./mullvad.nix
   ];
 
-  ###################### hardware ######################
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
@@ -43,7 +42,6 @@
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
   powerManagement.cpuFreqGovernor = "ondemand";
 
-  ######################## SB2 ###################
   ### schreen-hang  https://discourse.nixos.org/t/my-nixos-laptop-often-freezes/6381/4
   # https://git.ophanim.de/derped/nixos/src/commit/1424945b7df8698bbd2e256c48bf5d12c157513a/machines/Lilim/hardware-configuration.nix
   # https://github.com/NixOS/nixos-hardware/tree/master/microsoft/surface
@@ -108,7 +106,6 @@
   nixpkgs.config = {
 	allowBroken = true;
  	allowUnfree = true;
-
 	#chromium = { chromium.enableWideVine = true; };
   };
 
@@ -132,34 +129,28 @@
 #    };
 
   services.xserver = {
+    enable = true;
+    layout = "us";
+    desktopManager.gnome.enable = true;
+    displayManager.lightdm.enable = true;
+    displayManager.lightdm.greeter.enable = true;
+    #autoRepeatDelay = 2000; #  milliseconds that a key must be before autorepeat starts
+    #autoRepeatInterval = 70; # time between autorepeat-generated keystokes
     #	startx.enable = true;
     #autorun = true;
-    layout = "us";
-    enable = true;
-    autoRepeatDelay = 2000; #  milliseconds that a key must be before autorepeat starts
-    autoRepeatInterval = 70; # time between autorepeat-generated keystokes
-
-    desktopManager.gnome.enable = true;
-    desktopManager.xfce.enable = false;
+    #desktopManager.xfce.enable = false;
     #desktopManager.xfce.noDesktop = true;
     #desktopManager.xfce.enableXfwm = false;
-
-    desktopManager.xterm.enable = false;
-
+    #desktopManager.xterm.enable = false;
     # allowing displayManagers to automatically choose this session
     # adding a session for a display manager to choose
     # displaymanager.session = { };
     #displayManager.defaultSession = "none+i3";
-
-    displayManager.lightdm.enable = true;
-    displayManager.lightdm.greeter.enable = true;
-
-    displayManager.autoLogin.enable = false;
+    #displayManager.autoLogin.enable = false;
     #displayManager.autoLogin.user = "u";
-
     #windowManager.bspwm.configFile = "/etc/nixos/bspwm";
     #windowManager.bspwm.sxhkd.configFile = "/etc/nixos/sxhkd";
-    libinput.enable = true;
+    #libinput.enable = true;
     #config = '' ''; # misc
     #extraConfig = '' '';
   };
@@ -220,23 +211,22 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [
-    signal-desktop anki
+    signal-desktop
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     neovim vim vim_configurable #(import ./vim.nix)
     spotify-4k spotify-tui
     #mathematica
     tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser
-    links2
     fontmatrix
     android-file-transfer
     zathura # mupdf search for pdf in packages :)
-    git git-crypt gnupg pinentry_qt pinentry-curses
+    git git-crypt gnupg pinentry_qt
     adguardhome bitwarden monero-gui
     entr tmux tldr maim
     fzf bat exa ripgrep-all ripgrep
-    xclip copyq parcellite
     sxhkd xbindkeys xvkbd
     xdotool
+    #xclip copyq parcellite
     #ananmesis
     ####### automation
     # inotify-tools
@@ -248,14 +238,14 @@
     # inotail – a version of the tail utility which uses inotify to avoid polling for changes.
     # notitools – some useful inotify tools.
     # adhocify – can launch scripts upon inotify events. requires no config files.
-#   xlib.webcollage # decorate the screen with random images from the web
-#   xlib.xwininfo # window information utility for X
-#   xlib.xprop # property displayer for X
-#   xlib.xdpyinfo # display information utility for X
-#   xlib.xosview # X based system monitor
-#   xlib.xrestop # monitor server resources used by X11 clients
-    aspell
-    aspellDicts.en
+    #   xlib.webcollage # decorate the screen with random images from the web
+    #   xlib.xwininfo # window information utility for X
+    #   xlib.xprop # property displayer for X
+    #   xlib.xdpyinfo # display information utility for X
+    #   xlib.xosview # X based system monitor
+    #   xlib.xrestop # monitor server resources used by X11 clients
+    # aspell
+    # aspellDicts.en
     usbutils pciutils util-linux
     sysstat busybox toybox
     pstree #trace
@@ -266,21 +256,21 @@
     #readlink # read value of a symbolic link
     lsof #list open files
     #lsusb # list USB devices
-#    lsmod # program to show the status of modules in the Linux Kernel
-#     # += insmod modprobe modinfo depmod
+    #lsmod # program to show the status of modules in the Linux Kernel
+    # += insmod modprobe modinfo depmod
     lshw # list all hardware
-  #  lspc
-#    lspci # list PCI devices
-  #  iostat # disk, cpu, network
-  #  ltrace # A library call tracer
-  #  glxinfo # gpu info
+    #lspc
+    #lspci # list PCI devices
+    #iostat # disk, cpu, network
+    #ltrace # A library call tracer
+    #glxinfo # gpu info
     killall # kills process by name
     udevil # mount fs w/o pw
-     unzip
-     alacritty kitty putty cool-retro-term
-     mpv mps-youtube youtube-dl
-     ranger sxiv aria2 rtorrent
-     nix-prefetch-github nix-index nix-prefetch-scripts
+    unzip
+    alacritty kitty #putty cool-retro-term
+    mpv mps-youtube youtube-dl
+    ranger sxiv #aria2 rtorrent
+    nix-prefetch-github   nix-index    nix-prefetch-scripts
   ];
 
  # disable files
