@@ -28,6 +28,7 @@
       ./sxhkd.nix
       ./xbindkeys.nix
       ./hardware-configuration.nix
+      ./ranger.nix
       ./mullvad.nix
   ];
 
@@ -71,7 +72,6 @@
   # boot time kernel command line arguments
   # boot.kernelParams = [ ];
 
-
   # kernel runtime parameters
   # see all via syscty -
   boot.kernel.sysctl =  {
@@ -104,9 +104,9 @@
   #  	};
 
   nixpkgs.config = {
-	allowBroken = true;
- 	allowUnfree = true;
-	#chromium = { chromium.enableWideVine = true; };
+    allowBroken = true;
+    allowUnfree = true;
+    #chromium = { chromium.enableWideVine = true; };
   };
 
   nix = {
@@ -128,17 +128,22 @@
 #      xkbOptions = "eurosign:e, compose:menu, grp:alt_space_toggle";
 #    };
 
+environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour ];
+
+# environment.gnome.excludedPackages = with pkgs; [gnome.cheese gnome-photos gnome.gnome-music gnome.gnome-terminal gnome.gedit epiphany evince gnome.gnome-characters gnome.totem gnome.tali gnome.iagno gnome.hitori gnome.atomix gnome-tour];
+
   services.xserver = {
     enable = true;
     layout = "us";
     desktopManager.gnome.enable = true;
+    #desktopManager.mate.enable = true; # USB tether did not work
     displayManager.lightdm.enable = true;
     displayManager.lightdm.greeter.enable = true;
     #autoRepeatDelay = 2000; #  milliseconds that a key must be before autorepeat starts
     #autoRepeatInterval = 70; # time between autorepeat-generated keystokes
     #	startx.enable = true;
     #autorun = true;
-    #desktopManager.xfce.enable = false;
+    #desktopManager.xfce.enable = true;
     #desktopManager.xfce.noDesktop = true;
     #desktopManager.xfce.enableXfwm = false;
     #desktopManager.xterm.enable = false;
@@ -211,9 +216,14 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [
+
+   # gnomeExtensions.transparent-panel
+    gnomeExtensions.no-title-bar
+    gnomeExtensions.hide-panel
+   # gnomeExtensions.appindicator
     signal-desktop
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
-    neovim vim vim_configurable #(import ./vim.nix)
+    vim # neovim vim_configurable #(import ./vim.nix)
     spotify-4k spotify-tui
     #mathematica
     tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser
@@ -221,7 +231,7 @@
     android-file-transfer
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt
-    adguardhome bitwarden monero-gui
+    bitwarden monero-gui
     entr tmux tldr maim
     fzf bat exa ripgrep-all ripgrep
     sxhkd xbindkeys xvkbd
@@ -239,13 +249,13 @@
     # notitools – some useful inotify tools.
     # adhocify – can launch scripts upon inotify events. requires no config files.
     #   xlib.webcollage # decorate the screen with random images from the web
-    #   xlib.xwininfo # window information utility for X
-    #   xlib.xprop # property displayer for X
-    #   xlib.xdpyinfo # display information utility for X
     #   xlib.xosview # X based system monitor
-    #   xlib.xrestop # monitor server resources used by X11 clients
-    # aspell
-    # aspellDicts.en
+       xorg.xwininfo # window information utility for X
+       xorg.xprop # property displayer for X
+       xorg.xdpyinfo # display information utility for X
+       #xorg.xrestop # monitor server resources used by X11 clients
+    #ispell 
+    aspell aspellDicts.en
     usbutils pciutils util-linux
     sysstat busybox toybox
     pstree #trace
@@ -287,7 +297,7 @@
 
   environment.variables = {
     #PAGER = "bat -A";
-    EDITOR = "emacs";
+    EDITOR = "emacsclient";
     VISUAL = "emacs";
     BROWSER = "vivaldi";
     TERMINAL = "kitty";
