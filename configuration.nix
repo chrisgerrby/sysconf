@@ -85,10 +85,10 @@
  ## is set via nixos
 
   #suspend if powerbutton his bumped, rather than shutdown.
-  services.logind.lidSwitch = "ignore";
-  services.logind.extraConfig = ''
-    HandlePowerKey=suspend
-  '';
+#  services.logind.lidSwitch = "ignore";
+#  services.logind.extraConfig = ''
+#    HandlePowerKey=suspend
+#  '';
 
  # included surface-control # allowing control of the dGPU
 
@@ -106,6 +106,7 @@
   nixpkgs.config = {
     allowBroken = true;
     allowUnfree = true;
+    permittedInsecurePackages = [ "xpdf-4.03" "adobe-reader-9.5.5" ];
     #chromium = { chromium.enableWideVine = true; };
   };
 
@@ -139,6 +140,8 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #desktopManager.mate.enable = true; # USB tether did not work
     displayManager.lightdm.enable = true;
     displayManager.lightdm.greeter.enable = true;
+    displayManager.autoLogin.enable = true;
+    displayManager.autoLogin.user = "u";
     #autoRepeatDelay = 2000; #  milliseconds that a key must be before autorepeat starts
     #autoRepeatInterval = 70; # time between autorepeat-generated keystokes
     #	startx.enable = true;
@@ -151,8 +154,6 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     # adding a session for a display manager to choose
     # displaymanager.session = { };
     #displayManager.defaultSession = "none+i3";
-    #displayManager.autoLogin.enable = false;
-    #displayManager.autoLogin.user = "u";
     #windowManager.bspwm.configFile = "/etc/nixos/bspwm";
     #windowManager.bspwm.sxhkd.configFile = "/etc/nixos/sxhkd";
     #libinput.enable = true;
@@ -216,7 +217,6 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [
-
    # gnomeExtensions.transparent-panel
     gnomeExtensions.no-title-bar
     gnomeExtensions.hide-panel
@@ -229,6 +229,9 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser
     fontmatrix
     android-file-transfer
+    foxitreader
+    adobe-reader
+    xpdf # pdftotxt
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt
     bitwarden monero-gui
