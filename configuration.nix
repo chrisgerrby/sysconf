@@ -129,15 +129,14 @@
 #      xkbOptions = "eurosign:e, compose:menu, grp:alt_space_toggle";
 #    };
 
-#environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour ];
+environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour ];
 
-# environment.gnome.excludedPackages = with pkgs; [gnome.cheese gnome-photos gnome.gnome-music gnome.gnome-terminal gnome.gedit epiphany evince gnome.gnome-characters gnome.totem gnome.tali gnome.iagno gnome.hitori gnome.atomix gnome-tour];
 
   services.xserver = {
     enable = true;
     layout = "us";
-    #desktopManager.gnome.enable = true;
-    desktopManager.pantheon.enable = true;
+    desktopManager.gnome.enable = true;
+    #desktopManager.pantheon.enable = true; # mod+1 does not activate first program in panel # alt+tab keyboard marco does not work
     #desktopManager.mate.enable = true; # USB tether did not work
     displayManager.lightdm.enable = true;
     displayManager.lightdm.greeter.enable = true;
@@ -218,28 +217,25 @@
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [
-   # gnomeExtensions.transparent-panel
-    gnomeExtensions.no-title-bar
-    gnomeExtensions.hide-panel
-   # gnomeExtensions.appindicator
+   # gnomeExtensions.transparent-panel gnomeExtensions.no-title-bar gnomeExtensions.hide-panel gnomeExtensions.appindicator
     signal-desktop
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     vim # neovim vim_configurable #(import ./vim.nix)
+    # wiki-tui # cool, but lacks functionality
     spotify-4k spotify-tui
-    #mathematica
+    googler
+    #mathematica # not working
     tor-browser-bundle-bin vivaldi firefox #chromiumBeta google-chrome-beta google-chrome nyxt qutebrowser
     fontmatrix
-    android-file-transfer
-    foxitreader
-    adobe-reader
+    #android-file-transfer
+    #foxitreader adobe-reader
     xpdf # pdftotxt
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt
     bitwarden monero-gui
-    entr tmux tldr maim
-    fzf bat exa ripgrep-all ripgrep
-    sxhkd xbindkeys xvkbd
-    xdotool
+    #entr tmux tldr maim
+    fzf bat exa ripgrep-all
+    #sxhkd xbindkeys xvkbd xdotool
     #xclip copyq parcellite
     #ananmesis
     ####### automation
@@ -260,30 +256,30 @@
        #xorg.xrestop # monitor server resources used by X11 clients
     #ispell 
     aspell aspellDicts.en
-    usbutils pciutils util-linux
-    sysstat busybox toybox
-    pstree #trace
-    htop # active processes
-    ncdu # disk usage
+    #usbutils pciutils util-linux
+    #sysstat busybox toybox
+    #pstree #trace
+    #htop # active processes
+    #ncdu # disk usage
     #tail
     #slabtop # mem usag
     #readlink # read value of a symbolic link
-    lsof #list open files
+    #lsof #list open files
     #lsusb # list USB devices
     #lsmod # program to show the status of modules in the Linux Kernel
     # += insmod modprobe modinfo depmod
-    lshw # list all hardware
+    #lshw # list all hardware
     #lspc
     #lspci # list PCI devices
     #iostat # disk, cpu, network
     #ltrace # A library call tracer
     #glxinfo # gpu info
     killall # kills process by name
-    udevil # mount fs w/o pw
+    #udevil # mount fs w/o pw
     unzip
     alacritty kitty #putty cool-retro-term
-    mpv mps-youtube youtube-dl
-    ranger sxiv #aria2 rtorrent
+    #mpv mps-youtube youtube-dl
+    ranger sxiv feh #aria2 rtorrent
     nix-prefetch-github   nix-index    nix-prefetch-scripts
   ];
 
