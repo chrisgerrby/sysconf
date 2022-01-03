@@ -2,6 +2,15 @@
 { config, pkgs, lib, callPackage, ... }:
 
  let
+    kitty-doge = pkgs.symlinkJoin {
+      name = "kitty";
+      paths = [ pkgs.kitty ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/kitty \
+        --add-flags "--start-as=fullscreen"
+        '';
+      };
     spotify-4k = pkgs.symlinkJoin {
       name = "spotify";
       paths = [ pkgs.spotify ];
@@ -184,7 +193,12 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
   # services.printing.enable = true; # Enable CUPS to print documents.
 
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
+  hardware.bluetooth.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.root.hashedPassword = "$6$OO/d1fIDgXpFZ7$Urtt2Wl.QgQW4Pfu4aF49D05ZyJPYvpLu3RIjxiwg1zsCLn0kceP9I7594VIDGSZxBcG4uJs8WxCTilmqgmdN0";
   users.users.u = {
@@ -230,6 +244,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #android-file-transfer
     #foxitreader adobe-reader
     xpdf # pdftotxt
+    catdocx
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt
     bitwarden monero-gui
@@ -277,7 +292,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     killall # kills process by name
     #udevil # mount fs w/o pw
     unzip
-    alacritty kitty #putty cool-retro-term
+    doge alacritty kitty-doge kitty #putty cool-retro-term
     #mpv mps-youtube youtube-dl
     ranger sxiv feh #aria2 rtorrent
     nix-prefetch-github   nix-index    nix-prefetch-scripts

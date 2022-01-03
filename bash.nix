@@ -51,6 +51,7 @@
       f = "fzf --preview 'bat --color=always --style=numbers --line-range :500 {}'";
       b = "bat -A";
       l = "exa -a --long -b --changed -U -@ --header"; # --links
+      "4" = "googler -l en -g us -j";
       g = "/etc/user/u/sysconf/gitAutoPush.sh";
       nrs = "sudo nixos-rebuild switch -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrt = "nixos-rebuild test -I nixos-config=/etc/user/u/sysconf/configuration.nix";
