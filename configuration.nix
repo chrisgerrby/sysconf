@@ -129,14 +129,15 @@
 #      xkbOptions = "eurosign:e, compose:menu, grp:alt_space_toggle";
 #    };
 
-environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour ];
+#environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour ];
 
 # environment.gnome.excludedPackages = with pkgs; [gnome.cheese gnome-photos gnome.gnome-music gnome.gnome-terminal gnome.gedit epiphany evince gnome.gnome-characters gnome.totem gnome.tali gnome.iagno gnome.hitori gnome.atomix gnome-tour];
 
   services.xserver = {
     enable = true;
     layout = "us";
-    desktopManager.gnome.enable = true;
+    #desktopManager.gnome.enable = true;
+    desktopManager.pantheon.enable = true;
     #desktopManager.mate.enable = true; # USB tether did not work
     displayManager.lightdm.enable = true;
     displayManager.lightdm.greeter.enable = true;
