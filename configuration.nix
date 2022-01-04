@@ -38,6 +38,7 @@
       ./xbindkeys.nix
       ./hardware-configuration.nix
       ./ranger.nix
+      #./tresorit
       ./mullvad.nix
   ];
 
