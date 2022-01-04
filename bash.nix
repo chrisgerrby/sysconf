@@ -2,10 +2,10 @@
 
     programs.bash.interactiveShellInit = ''
 
-	# @Ripgrep integration 
-	## https://github.com/junegunn/fzf/blob/master/ADVANCED.md 
+	# @Ripgrep integration
+	## https://github.com/junegunn/fzf/blob/master/ADVANCED.md
 	# https://gist.github.com/gnanderson/d74079d16714bb8b2822a7a07cc883d4
-	# rga-fzf 
+	# rga-fzf
 	z() {
 		RG_PREFIX="rga --files-with-matches"
 		local file
@@ -36,22 +36,25 @@
 #       	#		else
 #       	#			curl -s --data-binary @- "$url"
 #       	#	fi
-#       	#       } 
+#       	#       }
 
 
   programs.bash = {
     enableCompletion = true;
     shellAliases = {
       e = "emacs";
-      v = "nvim";
+      v = "vim";
       s = "sudo su";
       r = "ranger";
       m = "man";
-      a = "rga -C 4";
+      a = "rga -C 5";
       f = "fzf --preview 'bat --color=always --style=numbers --line-range :500 {}'";
       b = "bat -A";
-      l = "exa -a --long -b --changed -U -@ --header"; # --links
+      l = "exa -a -b -U -@ --header"; # --links --long --changed 
+      "3" = "googler -l en -g us";
       "4" = "googler -l en -g us -j";
+      "5" = "googler -l en -g us -V --url-handler mpv $argv";
+      "6" = "googler -l en -g us -w youtube.com --url-handler mpv $argv";
       g = "/etc/user/u/sysconf/gitAutoPush.sh";
       nrs = "sudo nixos-rebuild switch -I nixos-config=/etc/user/u/sysconf/configuration.nix";
       nrt = "nixos-rebuild test -I nixos-config=/etc/user/u/sysconf/configuration.nix";

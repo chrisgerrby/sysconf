@@ -245,6 +245,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #foxitreader adobe-reader
     xpdf # pdftotxt
     catdocx
+    lolcat
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt
     bitwarden monero-gui
@@ -292,8 +293,8 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     killall # kills process by name
     #udevil # mount fs w/o pw
     unzip
-    doge alacritty kitty-doge kitty #putty cool-retro-term
-    #mpv mps-youtube youtube-dl
+    doge alacritty kitty-doge  #putty cool-retro-term
+    mpv # mps-youtube youtube-dl
     ranger sxiv feh #aria2 rtorrent
     nix-prefetch-github   nix-index    nix-prefetch-scripts
   ];
