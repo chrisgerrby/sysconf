@@ -194,11 +194,11 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
   # services.printing.enable = true; # Enable CUPS to print documents.
 
   sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
-  };
+#  hardware.pulseaudio = {
+#    enable = true;
+#    extraModules = [ pkgs.pulseaudio-modules-bt ];
+#    package = pkgs.pulseaudioFull;
+#  };
   hardware.bluetooth.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.root.hashedPassword = "$6$OO/d1fIDgXpFZ7$Urtt2Wl.QgQW4Pfu4aF49D05ZyJPYvpLu3RIjxiwg1zsCLn0kceP9I7594VIDGSZxBcG4uJs8WxCTilmqgmdN0";
