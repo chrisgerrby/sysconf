@@ -2,6 +2,15 @@
 { config, pkgs, lib, callPackage, ... }:
 
  let
+    spideroak-4k = pkgs.symlinkJoin {
+      name = "kitty";
+      paths = [ pkgs.spideroak ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/spideroak \
+        --add-flags "--force-scale-factor=1.8"
+        '';
+      };
     kitty-doge = pkgs.symlinkJoin {
       name = "kitty";
       paths = [ pkgs.kitty ];
@@ -233,9 +242,10 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 
   environment.systemPackages = with pkgs; [
    # gnomeExtensions.transparent-panel gnomeExtensions.no-title-bar gnomeExtensions.hide-panel gnomeExtensions.appindicator
+    spideroak
     signal-desktop
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
-    vim # neovim vim_configurable #(import ./vim.nix)
+    neovim # vim vim_configurable #(import ./vim.nix)
     # wiki-tui # cool, but lacks functionality
     spotify-4k spotify-tui
     googler
@@ -245,8 +255,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #android-file-transfer
     #foxitreader adobe-reader
     xpdf # pdftotxt
-    catdocx
-    lolcat
+    catdocx lolcat
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt
     bitwarden monero-gui
@@ -295,7 +304,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #udevil # mount fs w/o pw
     unzip
     doge alacritty kitty-doge  #putty cool-retro-term
-    mpv # mps-youtube youtube-dl
+    mpv mps-youtube #youtube-dl
     ranger sxiv feh #aria2 rtorrent
     nix-prefetch-github   nix-index    nix-prefetch-scripts
   ];

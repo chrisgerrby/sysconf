@@ -42,8 +42,8 @@
   programs.bash = {
     enableCompletion = true;
     shellAliases = {
-      e = "emacs";
-      v = "vim";
+      e = "emacsclient";
+      v = "nvim";
       s = "sudo su";
       r = "ranger";
       m = "man";
