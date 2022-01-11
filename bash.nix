@@ -65,7 +65,7 @@
       ncu = "nix-channel --update";
       h = "cd ~ && exa --tree -L=3 --long";
       c = "cd /etc/user/u/sysconf && exa --long -B --header";
-      ce = "emacs /etc/user/u/sysconf/configuration.nix";
+      ce = "nvim /etc/user/u/sysconf/configuration.nix";
       ".." = "cd .. && exa --tree -L=1 --header";
       #m = "man $1 | 'bat --color=always --style=numbers --line-range=:1000 {}'";
       #"exa --binary --header --long"

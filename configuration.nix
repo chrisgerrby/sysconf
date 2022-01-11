@@ -2,15 +2,6 @@
 { config, pkgs, lib, callPackage, ... }:
 
  let
-    spideroak-4k = pkgs.symlinkJoin {
-      name = "kitty";
-      paths = [ pkgs.spideroak ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/spideroak \
-        --add-flags "--force-scale-factor=1.8"
-        '';
-      };
     kitty-doge = pkgs.symlinkJoin {
       name = "kitty";
       paths = [ pkgs.kitty ];
@@ -240,7 +231,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 #  services.usbguard.enable = true;
 #  services.apcupsd.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [ # stpkg
    # gnomeExtensions.transparent-panel gnomeExtensions.no-title-bar gnomeExtensions.hide-panel gnomeExtensions.appindicator
     spideroak
     signal-desktop
@@ -256,6 +247,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #foxitreader adobe-reader
     xpdf # pdftotxt
     catdocx lolcat
+    pandoc
     zathura # mupdf search for pdf in packages :)
     git git-crypt gnupg pinentry_qt
     bitwarden monero-gui
@@ -291,7 +283,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #slabtop # mem usag
     #readlink # read value of a symbolic link
     #lsof #list open files
-    #lsusb # list USB devices
+    # lsusb # list USB devices
     #lsmod # program to show the status of modules in the Linux Kernel
     # += insmod modprobe modinfo depmod
     #lshw # list all hardware
@@ -323,9 +315,9 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 
   environment.variables = {
     #PAGER = "bat -A";
-    EDITOR = "emacsclient";
-    VISUAL = "emacs";
-    BROWSER = "vivaldi";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    BROWSER = "firefox";
     TERMINAL = "kitty";
     #FILE =
     RUST_BACKTRACE = "1";
