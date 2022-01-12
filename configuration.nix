@@ -52,7 +52,7 @@
   };
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
   powerManagement.cpuFreqGovernor = "ondemand";
-
+  services.arbtt.enable = true;
   ### schreen-hang  https://discourse.nixos.org/t/my-nixos-laptop-often-freezes/6381/4
   # https://git.ophanim.de/derped/nixos/src/commit/1424945b7df8698bbd2e256c48bf5d12c157513a/machines/Lilim/hardware-configuration.nix
   # https://github.com/NixOS/nixos-hardware/tree/master/microsoft/surface
@@ -232,6 +232,8 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ # stpkg
+  arcan.espeak
+  termdown
    # gnomeExtensions.transparent-panel gnomeExtensions.no-title-bar gnomeExtensions.hide-panel gnomeExtensions.appindicator
     spideroak
     signal-desktop
