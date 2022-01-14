@@ -126,9 +126,11 @@
     gc.options = "--delete-older-than 30d";
     autoOptimiseStore = true;
     extraOptions = ''
+      experimental-features = nix-command
       min-free = ${toString (100 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
+   package = pkgs.nixUnstable;
    };
 
 #   toggle between us, it keyboardlayout on !SPACE
@@ -232,6 +234,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ # stpkg
+  nnn
   arcan.espeak
   termdown
    # gnomeExtensions.transparent-panel gnomeExtensions.no-title-bar gnomeExtensions.hide-panel gnomeExtensions.appindicator
