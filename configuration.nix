@@ -52,7 +52,7 @@
   };
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
   powerManagement.cpuFreqGovernor = "ondemand";
-  services.arbtt.enable = true;
+  # services.arbtt.enable = true;
   ### schreen-hang  https://discourse.nixos.org/t/my-nixos-laptop-often-freezes/6381/4
   # https://git.ophanim.de/derped/nixos/src/commit/1424945b7df8698bbd2e256c48bf5d12c157513a/machines/Lilim/hardware-configuration.nix
   # https://github.com/NixOS/nixos-hardware/tree/master/microsoft/surface
@@ -147,6 +147,8 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
   services.xserver = {
     enable = true;
     layout = "us";
+    #desktopManager.plasma5.enable = true; # tether not work otb, nor wifi
+    # desktopManager.plasma5.useQtScaling = true;
     desktopManager.gnome.enable = true;
     #desktopManager.pantheon.enable = true; # mod+1 does not activate first program in panel # alt+tab keyboard marco does not work
     #desktopManager.mate.enable = true; # USB tether did not work
@@ -234,11 +236,13 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ # stpkg
-  nnn
-  arcan.espeak
-  termdown
+   arcan.espeak
+   pcloud
+   notepadqq
+   cheat navi # howdoi how2 eg cht-sh
+   # firejail
+   nnn #ranger
    # gnomeExtensions.transparent-panel gnomeExtensions.no-title-bar gnomeExtensions.hide-panel gnomeExtensions.appindicator
-    spideroak
     signal-desktop
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
     neovim # vim vim_configurable #(import ./vim.nix)
@@ -302,7 +306,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     unzip
     doge alacritty kitty-doge  #putty cool-retro-term
     mpv mps-youtube #youtube-dl
-    ranger sxiv feh #aria2 rtorrent
+    sxiv feh #aria2 rtorrent
     nix-prefetch-github   nix-index    nix-prefetch-scripts
   ];
 

@@ -47,6 +47,7 @@
       s = "sudo su";
       r = "ranger";
       m = "man";
+      n = "nnn";
       a = "rga -C 5";
       f = "fzf --preview 'bat --color=always --style=numbers --line-range :500 {}'";
       b = "bat -A";
