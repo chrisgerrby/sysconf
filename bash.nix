@@ -2,6 +2,13 @@
 
     programs.bash.interactiveShellInit = ''
 
+        # https://bluz71.github.io/2018/11/26/fuzzy-finding-in-bash-with-fzf.html
+   	# make preview pdf 
+	# swallow terminal, or alteast be independent of it
+        p() {
+          zathura "$(fzf --preview='head -$LINES {}' --reverse)"
+	}
+
 	# @Ripgrep integration
 	## https://github.com/junegunn/fzf/blob/master/ADVANCED.md
 	# https://gist.github.com/gnanderson/d74079d16714bb8b2822a7a07cc883d4
@@ -49,7 +56,7 @@
       m = "man";
       n = "nnn";
       a = "rga -C 5";
-      f = "fzf --preview 'bat --color=always --style=numbers --line-range :500 {}'";
+      f = "fzf --preview --reverse 'bat --color=always --style=numbers --line-range :500 {}'";
       b = "bat -A";
       l = "exa -a -b -U -@ --header"; # --links --long --changed 
       "3" = "googler -l en -g us";
