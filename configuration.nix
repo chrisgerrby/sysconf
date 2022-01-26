@@ -147,9 +147,10 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
   services.xserver = {
     enable = true;
     layout = "us";
+    # exwm org-tangle # https://www.alexeyshmalko.com/2020/literate-config/
+    desktopManager.gnome.enable = true;
     #desktopManager.plasma5.enable = true; # tether not work otb, nor wifi
     # desktopManager.plasma5.useQtScaling = true;
-    desktopManager.gnome.enable = true;
     #desktopManager.pantheon.enable = true; # mod+1 does not activate first program in panel # alt+tab keyboard marco does not work
     #desktopManager.mate.enable = true; # USB tether did not work
     displayManager.lightdm.enable = true;

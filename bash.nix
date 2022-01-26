@@ -22,7 +22,7 @@
 				rga --pretty -C 5 {q} {}" \
 					--phony -q "$1" \
 					--bind "change:reload:$RG_PREFIX {q}" \
-					--preview-window="70%:wrap" \
+					--preview-window="50%:wrap" \
 		)" &&
 		echo "opening $file" &&
 		xdg-open "$file"
