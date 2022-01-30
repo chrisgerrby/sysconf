@@ -59,22 +59,22 @@ This function should only modify configuration layer settings."
     ;;                         ))
      ;twitter                           ;  ; nitter . twitter rss feed
 
-      latex
-    ;; (latex :variables ;; latex-extra, latex-unicode-math-mode, cdlatex, auctex, bibtex
-    ;;        latex-backen nil ;; lsp company-auctex
-    ;;        latex-build-command 'latexmk ;; latex
-    ;;        latex-build-engine 'default ;; - 'default - 'luatex - 'omega - 'xetex
-    ;;        latex-enable-auto-fil nil ;; t
-    ;;        latex-enable-folding t ;; 'tex-fold-mode
-    ;;        latex-refresh-preview t
-    ;;       ; latex-nofill-env
-    ;;       ; latex-enable-magic 't
-    ;;       ; magic-latex-enable-block-highlight t ;; show font properties like \large
-    ;;       ; magic-latex-enable-block-align t ;; reflect block alignment such as \center (default nil)
-    ;;       ; magic-latex-enable-pretty-symbols t ;; substitute symbols in place of code, e.g. greek letters (default t)
-    ;;       ; magic-latex-enable-suscript  t ;; how subscripts and superscripts (default t)
-    ;;       ; magic-latex-enable-inline-image t ;; show images inline (default nil)
-    ;;        )
+     (latex :variables ;; latex-extra, latex-unicode-math-mode, cdlatex, auctex, bibtex
+            latex-backen 'company-auctex ;; default='company-auctex nil 'lsp (if lsp layer) 'company-auctex
+            latex-build-command 'latex ;; 'latex 'latexmk
+            latex-build-engine 'default ;; - 'default - 'luatex - 'omega - 'xetex
+            latex-enable-auto-fil t ;; default=t nil
+            latex-enable-folding nil ;; default=nil t 'tex-fold-mode
+            latex-refresh-preview nil ;; default=nil t
+            latex-enable-magic nil ;; default=nil
+            latex-view-with-pdf-tools	nil ;; default=t (only works if pdf layer installed)
+           ; latex-nofill-en
+           ; magic-latex-enable-block-highlight t ;; show font properties like \large
+           ; magic-latex-enable-block-align t ;; reflect block alignment such as \center (default nil)
+           ; magic-latex-enable-pretty-symbols t ;; substitute symbols in place of code, e.g. greek letters (default t)
+           ; magic-latex-enable-suscript  t ;; how subscripts and superscripts (default t)
+           ; magic-latex-enable-inline-image t ;; show images inline (default nil)
+            )
 
      (org :variables
           org-enable-roam-support t
@@ -724,12 +724,12 @@ before packages are loaded."
 
 ;; LATEX BIBTEX ________________________________________________________________________
 
-;; (require 'tex)
-;; (TeX-global-PDF-mode t)
-;; (setq TeX-PDF-mode t)
-;; (setq TeX-source-correlate-mode t)
-;; (setq TeX-source-correlate-method 'synctex)
-;;
+ (require 'tex)
+ (TeX-global-PDF-mode t)
+ (setq TeX-PDF-mode t)
+ (setq TeX-source-correlate-mode t)
+ (setq TeX-source-correlate-method 'synctex)
+
 ;;;; (add-hook 'LaTeX-mode-hook
 ;;;;           (lambda ()
 ;;;;             ;;(assq-delete-all 'output-pdf TeX-view-program-selection)
@@ -745,18 +745,23 @@ before packages are loaded."
 ;; (setq TeX-save-query nil)
  (setq TeX-auto-save t)
 ;; (setq TeX-parse-self t)
-;; (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-;; (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+ (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+ (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 ;; (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode) ; turn on math-mode by default
+
 ;; ;;(setq-default TeX-master nil)
+
 ;; (setq reftex-file-extensions
 ;;       '(("nw" "tex" ".tex" ".ltx") ("bib" ".bib")))
 ;; (setq TeX-file-extensions
 ;;       '( "nw" "tex" "sty" "cls" "ltx" "texi" "texinfo"))
+
 ;; ;; So that RefTeX finds my bibliography
 ;; (setq reftex-default-bibliography '("c:/Users/chris/Dropbox/latexFiles/ref"))
+
 ;; ;; So that RefTeX also recognizes \bibliography{Ref.bib} , \addbibresource{Ref.bib} , \addbibresource{Ref.bib}.
 ;; (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
+
 ;; ;; Turn on RefTeX in AUCTeX
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 ;; ;; interface between RefTeX and AUCTeX, Instead of using RefTeX's commands directly, you can then also use them indirectly as part of the AUCTeX environment

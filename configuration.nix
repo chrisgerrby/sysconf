@@ -141,7 +141,7 @@
 #      xkbOptions = "eurosign:e, compose:menu, grp:alt_space_toggle";
 #    };
 
-environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour ];
+environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour ];
 
 
   services.xserver = {
@@ -237,6 +237,8 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ # stpkg
+   emacs27Packages.lsp-latex
+   emacs27Packages.company-auctex
    arcan.espeak
    pcloud
    notepadqq
