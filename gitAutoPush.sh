@@ -1,4 +1,5 @@
 #!/bin/sh
+cp ~/.spacemacs ~/sysconf/.spacemacs
 pushd ~/sysconf
 git add . 
 #echo 'Commit message:'

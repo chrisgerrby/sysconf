@@ -51,7 +51,7 @@
     fsType = "vfat";
   };
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
-  powerManagement.cpuFreqGovernor = "ondemand";
+  powerManagement.cpuFreqGovernor = "powersave"; # powersave ondemand
   # services.arbtt.enable = true;
   ### schreen-hang  https://discourse.nixos.org/t/my-nixos-laptop-often-freezes/6381/4
   # https://git.ophanim.de/derped/nixos/src/commit/1424945b7df8698bbd2e256c48bf5d12c157513a/machines/Lilim/hardware-configuration.nix
@@ -242,7 +242,7 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
    notepadqq
    cheat navi # howdoi how2 eg cht-sh
    # firejail
-   nnn #ranger
+   nnn ranger
    # gnomeExtensions.transparent-panel gnomeExtensions.no-title-bar gnomeExtensions.hide-panel gnomeExtensions.appindicator
     signal-desktop
     #p3x-onenote standardnotes # bwrap problem. because of /etc/user/u (?)
