@@ -124,7 +124,7 @@
     gc.automatic = true;
     gc.dates = "weekly";
     gc.options = "--delete-older-than 30d";
-    autoOptimiseStore = true;
+    settings.auto-optimise-store = true;
     extraOptions = ''
       experimental-features = nix-command
       min-free = ${toString (100 * 1024 * 1024)}
@@ -237,7 +237,9 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
 #  services.apcupsd.enable = true;
 
   environment.systemPackages = with pkgs; [ # stpkg
-   emacs27Packages.lsp-latex
+   gnomeExtensions.toggle-night-light
+   gnomeExtensions.night-light-slider
+   #emacs27Packages.lsp-latex   emacs27Packages.lsp-mode   emacs27Packages.lsp-ui    emacs27Packages.helm-lsp
    emacs27Packages.company-auctex
    arcan.espeak
    pcloud

@@ -1,6 +1,6 @@
-(defun dotspacemacs/layers ()
+ (defun dotspacemacs/layers ()
   "Layer configuration:
-This function should only modify configuration layer settings."
+   This function should only modify configuration layer settings."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -28,37 +28,83 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
-     python
-     emacs-lisp
-     helm
-
-     fzf ;; git clone git@github.com:ashyisme/fzf-spacemacs-layer.git ~/.emacs.d/private/fzf
-
-     ;;multiple-cursors
-     nixos
-     org
-     ;;treemacs
-      (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom)
-      ;; better-defaults
-      ;; git
-      ;; markdown
-     ;; syntax-checking
+   '(
+     ;; emacs for writing : https://out-of-cheese-error.netlify.app/spacemacs-config
+     ;; Org-kanban
+     ;; org-noter ;; (annotating pdf) https://github.com/weirdNox/org-noter/tree/9ead81d42dd4dd5074782d239b2efddf9b8b7b3d
+     ;; nov.el https://github.com/wasamasa/nov.el/tree/fa3887970ebde430aaf8a39dbf801566238c0973
+     ;; wc mode ;; count words, displays in modeline
+     ;; https://github.com/mhayashi1120/Emacs-langtool/
+     ;;
+     ;; pop up frame ;; https://github.com/muffinmad/emacs-mini-frame#emacs-mini-frame
+     ;;
+     ;; javascript
+     ;; php
+     ;; lua
+     ;; html
+     ;; git
+     ;; markdown
      ;; version-control
-     ; javascript python php lua
-    ;; exwm , first git clone exwm repo first https://github.com/timor/spacemacsOS/tree/d8ce7d6c8fab42bffeb157f850a36b258f6a8934
-    ;; (elfeed :variables ;; https://github.com/remyhonig/elfeed-org/tree/77b6bbf222487809813de260447d31c4c59902c9
-    ;;         rmh-elfeed-org-files (list "C:/Users/chris/dropbox/orgFiles/rss.org")
-    ;;         elfeed-enable-web-interface t
-    ;;         elfeed-enable-goodies nil
-    ;;         elfeed-feeds '(
-    ;;                        ;("" london futurists)
-    ;;                        ;("http://www.50ply.com/atom.xml" )  ; no autotagging
-    ;;                         ))
-     ;twitter                           ;  ; nitter . twitter rss feed
+     ;; treemacs
+     ;; python
+     ;;
+     ;; https://develop.spacemacs.org/layers/+web-services/search-engine/README.html
+     ranger
+     search-engine
+     helpful ;; This layer replaces the existing emacs related help buffers with more detailed ones.
+     (tabs :variables
+           tabs-auto-hide t
+           tabs-auto-hide-delay 3
+           )
+     emacs-lisp
+     spacemacs-defaults ;; better defaults for naitive emacs pkgs
+     spacemacs-editing
+     spacemacs-editing-visual
+     spacemacs-language ;; adds define-word , google-translate
+     (nixos :variables
+            nixos-format-on-save t
+            )
+     fzf ;; git clone git@github.com:ashyisme/fzf-spacemacs-layer.git ~/.emacs.d/private/fzf
+     (helm :variables
+           spacemacs-helm-rg-max-column-number 1024
+           )
 
+     (syntax-checking :variables
+                      syntax-checking-enable-tooltips t ;; nil
+                      syntax-checking-enable-by-default t ;; nil
+                      syntax-checking-auto-hide-tooltips nil ;;
+                      )
+     (deft :variables
+           deft-zetteldeft t
+           )
+
+     (org :variables
+          org-enable-roam-support t
+          org-want-todo-bindings t
+          ;; get ;; Insertion of images via org-download
+
+          )
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom
+            )
+     ;; better-defaults ;; changes default emacs editing bindings
+     ;; (multiple-cursors :variables
+     ;;                   multiple-cursors-backend 'evil-mc)
+     ;; exwm , first git clone exwm repo first https://github.com/timor/spacemacsOS/tree/d8ce7d6c8fab42bffeb157f850a36b258f6a8934
+     ;; (elfeed :variables ;; https://github.com/remyhonig/elfeed-org/tree/77b6bbf222487809813de260447d31c4c59902c9
+     ;;         rmh-elfeed-org-files (list "C:/Users/chris/dropbox/orgFiles/rss.org")
+     ;;         elfeed-enable-web-interface t
+     ;;         elfeed-enable-goodies nil
+     ;;         elfeed-feeds '(
+     ;;                        ;("" london futurists)
+     ;;                        ;("http://www.50ply.com/atom.xml" )  ; no autotagging
+     ;;                         ))
+     ;; twitter                           ;  ; nitter . twitter rss feed
+     ;; lsp
+     djvu
+     epub
+     pdf
      (latex :variables ;; latex-extra, latex-unicode-math-mode, cdlatex, auctex, bibtex
             latex-backen 'company-auctex ;; default='company-auctex nil 'lsp (if lsp layer) 'company-auctex
             latex-build-command 'latex ;; 'latex 'latexmk
@@ -75,31 +121,6 @@ This function should only modify configuration layer settings."
            ; magic-latex-enable-suscript  t ;; how subscripts and superscripts (default t)
            ; magic-latex-enable-inline-image t ;; show images inline (default nil)
             )
-
-     (org :variables
-          org-enable-roam-support t
-          org-want-todo-bindings t
-          )
-;;     (auto-completion :variables
-;;                      ;;auto-completion-return-key-behavior 'complete
-;;                      auto-completion-tab-key-behavior 'complete ;; cycle
-;;                      auto-completion-complete-with-key-sequence nil ;; burst of 2 keys is hotstring
-;;                      ;;auto-completion-complete-with-key-sequence-delay 0.1
-;;                      auto-completion-idle-delay 0.5
-;;                      auto-completion-private-snippets-directory nil
-;;                      auto-completion-enable-snippets-in-popup t ;; shows snippets in popup
-;;                      auto-completion-enable-help-tooltip t ;; t=auto , 'manual , press M-h
-;;                      auto-completion-enable-sort-by-usage t
-;;                      ;;spacemacs-default-company-backends '(company-files company-capf) ;; add completion frameworks per mode basis
-;;                      )
-     ;; (multiple-cursors :variables
-     ;;                   multiple-cursors-backend 'evil-mc)
-     ;; emacs for writing : https://out-of-cheese-error.netlify.app/spacemacs-config
-     ;; Org-kanban
-     ;; org-noter ;; (annotating pdf) https://github.com/weirdNox/org-noter/tree/9ead81d42dd4dd5074782d239b2efddf9b8b7b3d
-     ;; nov.el https://github.com/wasamasa/nov.el/tree/fa3887970ebde430aaf8a39dbf801566238c0973
-     ;; wc mode ;; count words, displays in modeline
-     ;; https://github.com/mhayashi1120/Emacs-langtool/
      (spell-checking :variables
                      enable-flyspell-auto-completion nil
                      spell-checking-enable-auto-dictionary t
@@ -108,9 +129,18 @@ This function should only modify configuration layer settings."
                      ;; back up own dictionary
                      ;; writing: proselint in flychec
                      )
-     ;; lsp
-     better-defaults
-     ;; markdown
+;;   (auto-completion :variables
+;;                    ;;auto-completion-return-key-behavior 'complete
+;;                    auto-completion-tab-key-behavior 'complete ;; cycle
+;;                    auto-completion-complete-with-key-sequence nil ;; burst of 2 keys is hotstring
+;;                    ;;auto-completion-complete-with-key-sequence-delay 0.1
+;;                    auto-completion-idle-delay 0.5
+;;                    auto-completion-private-snippets-directory nil
+;;                    auto-completion-enable-snippets-in-popup t ;; shows snippets in popup
+;;                    auto-completion-enable-help-tooltip t ;; t=auto , 'manual , press M-h
+;;                    auto-completion-enable-sort-by-usage t
+;;                    ;;spacemacs-default-company-backends '(company-files company-capf) ;; add completion frameworks per mode basis
+;;                    )
      )
 
 
@@ -655,6 +685,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  (setq deft-directory "~/4 write/orgFiles")
+
 ;; IMAGES ________________________________________________________________________
 ;;  (use-package image+
 ;;                                        ;    :load-path "~/elisp/Emacs-imagex"
@@ -936,7 +968,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(math-symbol-lists auctex fzf powerthesaurus elfeed-org elfeed-goodies ace-jump-mode noflet elfeed web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode lsp-treemacs bui lsp-mode markdown-mode cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic persistent-scratch unfill mwim flyspell-popup flyspell-correct-helm flyspell-correct auto-dictionary yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company-nixos-options company auto-yasnippet yasnippet ac-ispell auto-complete org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink htmlize helm-org-rifle gnuplot evil-org ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil treemacs cfrs pfuture posframe toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons memoize all-the-icons spaceline powerline restart-emacs request rainbow-delimiters quickrun popwin persp-mode password-generator paradox spinner overseer org-superstar open-junk-file nameless multi-line shut-up macrostep lorem-ipsum link-hint inspector info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl flycheck-elsa flx-ido flx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection annalist evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu emr iedit clang-format projectile paredit list-utils elisp-slime-nav editorconfig dumb-jump s drag-stuff dired-quick-sort define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol ht dash auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el hydra lv hybrid-mode font-lock+ evil goto-chg dotenv-mode diminish bind-map bind-key async))
+   '(ranger nov esxml kv engine-mode djvu3 djvu zetteldeft helpful elisp-refs flycheck-pos-tip deft centaur-tabs pdf-view-restore pdf-tools tablist math-symbol-lists auctex fzf powerthesaurus elfeed-org elfeed-goodies ace-jump-mode noflet elfeed web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode lsp-treemacs bui lsp-mode markdown-mode cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic persistent-scratch unfill mwim flyspell-popup flyspell-correct-helm flyspell-correct auto-dictionary yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company-nixos-options company auto-yasnippet yasnippet ac-ispell auto-complete org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink htmlize helm-org-rifle gnuplot evil-org ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil treemacs cfrs pfuture posframe toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons memoize all-the-icons spaceline powerline restart-emacs request rainbow-delimiters quickrun popwin persp-mode password-generator paradox spinner overseer org-superstar open-junk-file nameless multi-line shut-up macrostep lorem-ipsum link-hint inspector info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl flycheck-elsa flx-ido flx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection annalist evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu emr iedit clang-format projectile paredit list-utils elisp-slime-nav editorconfig dumb-jump s drag-stuff dired-quick-sort define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol ht dash auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el hydra lv hybrid-mode font-lock+ evil goto-chg dotenv-mode diminish bind-map bind-key async))
  '(warning-suppress-types '(((evil-collection)) ((evil-collection)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
