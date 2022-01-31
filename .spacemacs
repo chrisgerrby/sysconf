@@ -48,14 +48,13 @@
      ;; treemacs
      ;; python
      ;;
-     ;; https://develop.spacemacs.org/layers/+web-services/search-engine/README.html
      ranger
-     search-engine
+     search-engine ;; https://develop.spacemacs.org/layers/+web-services/search-engine/README.html
      helpful ;; This layer replaces the existing emacs related help buffers with more detailed ones.
-     (tabs :variables
-           tabs-auto-hide t
-           tabs-auto-hide-delay 3
-           )
+     ;; (tabs :variables
+     ;;       tabs-auto-hide t
+     ;;       tabs-auto-hide-delay 3
+     ;;       )
      emacs-lisp
      spacemacs-defaults ;; better defaults for naitive emacs pkgs
      spacemacs-editing
@@ -88,7 +87,6 @@
             shell-default-height 30
             shell-default-position 'bottom
             )
-     ;; better-defaults ;; changes default emacs editing bindings
      ;; (multiple-cursors :variables
      ;;                   multiple-cursors-backend 'evil-mc)
      ;; exwm , first git clone exwm repo first https://github.com/timor/spacemacsOS/tree/d8ce7d6c8fab42bffeb157f850a36b258f6a8934
@@ -105,6 +103,7 @@
      djvu
      epub
      pdf
+     ;; real time latex in org ;; https://github.com/yangsheng6810/org-latex-impatient/tree/39f22dc98cb8268af67c6df71778ec5784d2b683
      (latex :variables ;; latex-extra, latex-unicode-math-mode, cdlatex, auctex, bibtex
             latex-backen 'company-auctex ;; default='company-auctex nil 'lsp (if lsp layer) 'company-auctex
             latex-build-command 'latex ;; 'latex 'latexmk
@@ -152,13 +151,13 @@
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(beacon delight dim org-bullets visual-fill-column google-this smart-mode-line powerthesaurus)
+   dotspacemacs-additional-packages '(beacon delight dim org-bullets visual-fill-column google-this smart-mode-line mini-modeline powerthesaurus)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(smartparens evil-escape)
+   dotspacemacs-excluded-packages '(spaceline smartparens evil-escape)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -320,8 +319,8 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator arrow
-                                            :separator-scale 1.2)
+   ;; spacemacs :separator arrow :separator-scale 1.2
+   dotspacemacs-mode-line-theme '(custom)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -466,7 +465,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Show the scroll bar while scrolling. The auto hide time can be configured
    ;; by setting this variable to a number. (default t)
-   dotspacemacs-scroll-bar-while-scrolling t
+   dotspacemacs-scroll-bar-while-scrolling nil
 
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -685,6 +684,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+
   (setq deft-directory "~/4 write/orgFiles")
 
 ;; IMAGES ________________________________________________________________________
@@ -900,12 +900,27 @@ before packages are loaded."
      (whitespace-mode    " ·"  whitespace)
      ;(paredit-mode       " (" paredit)
      ))
+  (setq sml/no-confirm-load-theme t)
+  (setq size-indication-mode t)
+  (require 'smart-mode-line)
+  (sml/setup)
+  ;; (setq powerline-arrow-shape 'curve)
+  ;; (setq powerline-default-separator-dir '(right . left))
+  ;; (setq sml/theme 'powerline)
+;;  (setq sml/no-confirm-load-theme t)
+;;  (sml/setup)
+;;  (setq sml/replacer-regexp-list '((".+" "")))
+;;  (setq sml/theme 'dark)
 
- ;[ ;(setq sml/no-confirm-load-theme t)
-  ;(sml/setup)
-  ;(setq size-indication-mode t)
-  ;(setq sml/replacer-regexp-list '((".+" "")))
- ;];(setq sml/theme 'dark)
+  ;;  ;; I'm activating mini-modeline after smart-mode-line
+  ;;  (use-package mini-modeline
+  ;;    :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
+  ;;    :after smart-mode-line
+  ;;    :config
+  ;;    )
+    (require 'mini-modeline)
+    ;;(setq mini-modeline-mode t)
+    (mini-modeline-mode 1)
 
   ;;  (sml/show-frame-identification nil)
   ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/orgFiles/" ":orgFiles:") t)
@@ -967,8 +982,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(package-selected-packages
-   '(ranger nov esxml kv engine-mode djvu3 djvu zetteldeft helpful elisp-refs flycheck-pos-tip deft centaur-tabs pdf-view-restore pdf-tools tablist math-symbol-lists auctex fzf powerthesaurus elfeed-org elfeed-goodies ace-jump-mode noflet elfeed web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode lsp-treemacs bui lsp-mode markdown-mode cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic persistent-scratch unfill mwim flyspell-popup flyspell-correct-helm flyspell-correct auto-dictionary yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company-nixos-options company auto-yasnippet yasnippet ac-ispell auto-complete org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink htmlize helm-org-rifle gnuplot evil-org ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil treemacs cfrs pfuture posframe toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons memoize all-the-icons spaceline powerline restart-emacs request rainbow-delimiters quickrun popwin persp-mode password-generator paradox spinner overseer org-superstar open-junk-file nameless multi-line shut-up macrostep lorem-ipsum link-hint inspector info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl flycheck-elsa flx-ido flx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection annalist evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu emr iedit clang-format projectile paredit list-utils elisp-slime-nav editorconfig dumb-jump s drag-stuff dired-quick-sort define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol ht dash auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el hydra lv hybrid-mode font-lock+ evil goto-chg dotenv-mode diminish bind-map bind-key async))
+   '(mini-modeline ranger nov esxml kv engine-mode djvu3 djvu zetteldeft helpful elisp-refs flycheck-pos-tip deft centaur-tabs pdf-view-restore pdf-tools tablist math-symbol-lists auctex fzf powerthesaurus elfeed-org elfeed-goodies ace-jump-mode noflet elfeed web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode lsp-treemacs bui lsp-mode markdown-mode cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic persistent-scratch unfill mwim flyspell-popup flyspell-correct-helm flyspell-correct auto-dictionary yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company-nixos-options company auto-yasnippet yasnippet ac-ispell auto-complete org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink htmlize helm-org-rifle gnuplot evil-org ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil treemacs cfrs pfuture posframe toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons memoize all-the-icons spaceline powerline restart-emacs request rainbow-delimiters quickrun popwin persp-mode password-generator paradox spinner overseer org-superstar open-junk-file nameless multi-line shut-up macrostep lorem-ipsum link-hint inspector info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl flycheck-elsa flx-ido flx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection annalist evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu emr iedit clang-format projectile paredit list-utils elisp-slime-nav editorconfig dumb-jump s drag-stuff dired-quick-sort define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol ht dash auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el hydra lv hybrid-mode font-lock+ evil goto-chg dotenv-mode diminish bind-map bind-key async))
  '(warning-suppress-types '(((evil-collection)) ((evil-collection)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
