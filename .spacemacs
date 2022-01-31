@@ -904,6 +904,7 @@ before packages are loaded."
   (setq size-indication-mode t)
   (require 'smart-mode-line)
   (sml/setup)
+  ;; this works, just SPC f e R
   ;; (setq powerline-arrow-shape 'curve)
   ;; (setq powerline-default-separator-dir '(right . left))
   ;; (setq sml/theme 'powerline)
