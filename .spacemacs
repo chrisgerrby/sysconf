@@ -106,7 +106,7 @@
      ;; real time latex in org ;; https://github.com/yangsheng6810/org-latex-impatient/tree/39f22dc98cb8268af67c6df71778ec5784d2b683
      (latex :variables ;; latex-extra, latex-unicode-math-mode, cdlatex, auctex, bibtex
             latex-backen 'company-auctex ;; default='company-auctex nil 'lsp (if lsp layer) 'company-auctex
-            latex-build-command 'latex ;; 'latex 'latexmk
+            latex-build-command 'latexmk ;; 'latex 'latexmk
             latex-build-engine 'default ;; - 'default - 'luatex - 'omega - 'xetex
             latex-enable-auto-fil t ;; default=t nil
             latex-enable-folding nil ;; default=nil t 'tex-fold-mode
@@ -310,7 +310,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(adwaita gruvbox grandshell)
+   dotspacemacs-themes '(gruvbox adwaita grandshell)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -319,7 +319,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;; spacemacs :separator arrow :separator-scale 1.2
+   ;; spacemacs :separator arrow :separaror-scale 1.2
    dotspacemacs-mode-line-theme '(custom)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
@@ -329,7 +329,8 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Pragmata Pro Mono" :size 12.0)
+   ;; dotspacemacs-default-font '("Source Code Pro" :size 10.0 :weight normal :width normal)
+   dotspacemacs-default-font '("Pragmata Pro Mono" :size 11.0 :weight normal :width normal)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -687,27 +688,27 @@ before packages are loaded."
 
   (setq deft-directory "~/4 write/orgFiles")
 
-;; IMAGES ________________________________________________________________________
-;;  (use-package image+
-;;                                        ;    :load-path "~/elisp/Emacs-imagex"
-;;    :commands (imagex-global-sticky-mode imagex-auto-adjust-mode)
-;;    :init (progn (imagex-global-sticky-mode) (imagex-auto-adjust-mode)))
+  ;; IMAGES ________________________________________________________________________
+  ;;  (use-package image+
+  ;;                                        ;    :load-path "~/elisp/Emacs-imagex"
+  ;;    :commands (imagex-global-sticky-mode imagex-auto-adjust-mode)
+  ;;    :init (progn (imagex-global-sticky-mode) (imagex-auto-adjust-mode)))
 
-;; ORG-MODE ________________________________________________________________________
+  ;; ORG-MODE ________________________________________________________________________
 
-(with-eval-after-load 'org
-  ;; here goes your Org config to not conflict with org shipped w vanilla emacs  :)
+  (with-eval-after-load 'org
+    ;; here goes your Org config to not conflict with org shipped w vanilla emacs  :)
 
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "|" "DONE(d)")
-          (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-          (sequence "|" "CANCELED(c)")))
-  ;;    (setq org-todo-keywords
-  ;;          '((sequence "TODO" "PRO" "VERIFY" "|" "DONE" "DELEGATED")))
-  ;;
-  ;;    (setq org-todo-keyword-faces
-  ;;          '(("TODO" . org-warning) ("STARTED" . "yellow")
-  ;;            ("CANCELED" . (:foreground "blue" :weight bold))))
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "|" "DONE(d)")
+            (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+            (sequence "|" "CANCELED(c)")))
+    ;;    (setq org-todo-keywords
+    ;;          '((sequence "TODO" "PRO" "VERIFY" "|" "DONE" "DELEGATED")))
+    ;;
+    ;;    (setq org-todo-keyword-faces
+    ;;          '(("TODO" . org-warning) ("STARTED" . "yellow")
+    ;;            ("CANCELED" . (:foreground "blue" :weight bold))))
     (prefer-coding-system       'utf-8)
     (set-default-coding-systems 'utf-8)
     (set-terminal-coding-system 'utf-8)
@@ -754,123 +755,125 @@ before packages are loaded."
                       (org-todo 'todo)))))))))
     (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo))
 
-;; LATEX BIBTEX ________________________________________________________________________
+  ;; LATEX BIBTEX ________________________________________________________________________
 
- (require 'tex)
- (TeX-global-PDF-mode t)
- (setq TeX-PDF-mode t)
- (setq TeX-source-correlate-mode t)
- (setq TeX-source-correlate-method 'synctex)
+  ;; (require 'tex)
+  ;; (TeX-global-PDF-mode t)
+  ;; (setq TeX-PDF-mode t)
+  ;; (setq TeX-source-correlate-mode t)
+  ;; (setq TeX-source-correlate-method 'synctex)
 
 ;;;; (add-hook 'LaTeX-mode-hook
 ;;;;           (lambda ()
 ;;;;             ;;(assq-delete-all 'output-pdf TeX-view-program-selection)
 ;;;;             (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))))
 ;;;; (setq TeX-view-program-selection '(output-pdf "SumatraPDF"))
-;; (setq TeX-view-program-list
-;;       '(("SumatraPDF"
-;;          (""C:\Users\chris\AppData\Local\SumatraPDF\SumatraPDF.exe" -reuse-instance" (mode-io-correlate " -forward-search %b %n ")
-;;           " %o"))))
-;;
-;; (server-start)
-;; ;;  If you want to make AUCTeX aware of style files and multi-file documents right away, insert the following in your ‘.emacs’ file.
-;; (setq TeX-save-query nil)
- (setq TeX-auto-save t)
-;; (setq TeX-parse-self t)
- (add-hook 'LaTeX-mode-hook 'visual-line-mode)
- (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-;; (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode) ; turn on math-mode by default
+  ;; (setq TeX-view-program-list
+  ;;       '(("SumatraPDF"
+  ;;          (""C:\Users\chris\AppData\Local\SumatraPDF\SumatraPDF.exe" -reuse-instance" (mode-io-correlate " -forward-search %b %n ")
+  ;;           " %o"))))
+  ;;
+  ;; (server-start)
+  ;; ;;  If you want to make AUCTeX aware of style files and multi-file documents right away, insert the following in your ‘.emacs’ file.
+  ;; (setq TeX-save-query nil)
+  ;; (setq TeX-auto-save t)
+  ;; (setq TeX-parse-self t)
+  ;; (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+  ;; (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  ;; (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode) ; turn on math-mode by default
 
-;; ;;(setq-default TeX-master nil)
+  ;; ;;(setq-default TeX-master nil)
 
-;; (setq reftex-file-extensions
-;;       '(("nw" "tex" ".tex" ".ltx") ("bib" ".bib")))
-;; (setq TeX-file-extensions
-;;       '( "nw" "tex" "sty" "cls" "ltx" "texi" "texinfo"))
+  ;; (setq reftex-file-extensions
+  ;;       '(("nw" "tex" ".tex" ".ltx") ("bib" ".bib")))
+  ;; (setq TeX-file-extensions
+  ;;       '( "nw" "tex" "sty" "cls" "ltx" "texi" "texinfo"))
 
-;; ;; So that RefTeX finds my bibliography
-;; (setq reftex-default-bibliography '("c:/Users/chris/Dropbox/latexFiles/ref"))
+  ;; ;; So that RefTeX finds my bibliography
+  ;; (setq reftex-default-bibliography '("c:/Users/chris/Dropbox/latexFiles/ref"))
 
-;; ;; So that RefTeX also recognizes \bibliography{Ref.bib} , \addbibresource{Ref.bib} , \addbibresource{Ref.bib}.
-;; (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
+  ;; ;; So that RefTeX also recognizes \bibliography{Ref.bib} , \addbibresource{Ref.bib} , \addbibresource{Ref.bib}.
+  ;; (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
 
-;; ;; Turn on RefTeX in AUCTeX
-;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;; ;; interface between RefTeX and AUCTeX, Instead of using RefTeX's commands directly, you can then also use them indirectly as part of the AUCTeX environment
-;; (setq reftex-plug-into-AUCTeX t)
-;;
+  ;; ;; Turn on RefTeX in AUCTeX
+  ;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  ;; ;; interface between RefTeX and AUCTeX, Instead of using RefTeX's commands directly, you can then also use them indirectly as part of the AUCTeX environment
+  ;; (setq reftex-plug-into-AUCTeX t)
+  (setenv "PATH" (concat (getenv "PATH") "/nix/store/2smafg0aqrsfyzbdydb019crkvrdxyga-emacs-auctex-13.0.16.drv"))
+  (setq exec-path (append exec-path '("/nix/store/2smafg0aqrsfyzbdydb019crkvrdxyga-emacs-auctex-13.0.16.drv")))
+  ;;
 ;;;; (setenv "PATH" (concat (getenv "PATH") "e:/Program Files/MiKTeX 2.9/miktex/bin/x64"))
 ;;;; (setq exec-path (append exec-path '("e:/Program Files/MiKTeX 2.9/miktex/bin/x64")))
 
-;; NIXOS ________________________________________________________________________
+  ;; NIXOS ________________________________________________________________________
 
- (require 'nix-mode)
- (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
- (use-package nix-mode
-   :mode "\\.nix\\'")
+  (require 'nix-mode)
+  (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+  (use-package nix-mode
+    :mode "\\.nix\\'")
 
-; OTHER ________________________________________________________________________
+                                        ; OTHER ________________________________________________________________________
 
- (setq ns-pop-up-frames nil)
- (require 'google-this)
- ;;(require 'powerthesarus) ;; broke emacs
- ;(google-this-mode 1)
- ; Setting and showing the 80-character column width
- ;(toggle-fill-column-indicator 1)
- ;(set-fill-column 80)
- ;; (auto-fill-mode t)
- ;;(toggle-truncate-lines 1)
- ;; (spacemacs/toggle-golden-ratio-on)
+  (setq ns-pop-up-frames nil)
+  (require 'google-this)
+  ;;(require 'powerthesarus) ;; broke emacs
+  ;;(google-this-mode 1)
+  ;; Setting and showing the 80-character column width
+  ;;(toggle-fill-column-indicator 1)
+  ;;(set-fill-column 80)
+  ;; (auto-fill-mode t)
+  ;;(toggle-truncate-lines 1)
+  ;; (spacemacs/toggle-golden-ratio-on)
 
-;; (with-eval-after-load 'visual-fill-column
-;;   (add-hook 'visual-fill-column-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
-;;   (setq split-window-preferred-function 'visual-fill-column-split-window-sensibly)
-;;   (advice-add 'text-scale-adjust :after 'visual-fill-column-adjust))
+  ;; (with-eval-after-load 'visual-fill-column
+  ;;   (add-hook 'visual-fill-column-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
+  ;;   (setq split-window-preferred-function 'visual-fill-column-split-window-sensibly)
+  ;;   (advice-add 'text-scale-adjust :after 'visual-fill-column-adjust))
 
- ;; (require 'tablist)
- ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
- ;; (setq spacemacs/toggle-auto-fill-mode-on)
- ;; (setq spacemacs/toggle-truncate-lines-on)
- ;; (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
+  ;; (require 'tablist)
+  ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  ;; (setq spacemacs/toggle-auto-fill-mode-on)
+  ;; (setq spacemacs/toggle-truncate-lines-on)
+  ;; (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
 
- ;;(set-fontset-font t nil (font-spec :size 20 :name "Cambria Math")) ; Unsuported glyps are rendered in this font
- ;;(set-fontset-font t nil (font-spec :size 20 :name "Unifont"))
- ;;(set-fontset-font t nil (font-spec :size 20 :name "Symbola"))
+  ;;(set-fontset-font t nil (font-spec :size 20 :name "Cambria Math")) ; Unsuported glyps are rendered in this font
+  ;;(set-fontset-font t nil (font-spec :size 20 :name "Unifont"))
+  ;;(set-fontset-font t nil (font-spec :size 20 :name "Symbola"))
 
- ;; THEME ________________________________________________________________________
- ;;(beacon-mode 1)
- (setq-default evil-insert-state-cursor '(box "#66cd00")) ; "chartreuse3"
- (setq-default cursor-type 'Box)
+  ;; THEME ________________________________________________________________________
+  ;;(beacon-mode 1)
+  (setq-default evil-insert-state-cursor '(box "#66cd00")) ; "chartreuse3"
+  (setq-default cursor-type 'Box)
 
- "Sets the hl-line face to have no foregorund and a background that is 10% darker than the default face's background."
- (require 'color)
- (defun set-hl-line-color-based-on-theme ()
-   (set-face-attribute 'hl-line nil
-                       :foreground nil
-                       :background (color-darken-name (face-background 'default) 10)))
- (add-hook 'global-hl-line-mode-hook 'set-hl-line-color-based-on-theme)
+  "Sets the hl-line face to have no foregorund and a background that is 10% darker than the default face's background."
+  (require 'color)
+  (defun set-hl-line-color-based-on-theme ()
+    (set-face-attribute 'hl-line nil
+                        :foreground nil
+                        :background (color-darken-name (face-background 'default) 10)))
+  (add-hook 'global-hl-line-mode-hook 'set-hl-line-color-based-on-theme)
 
- ;;(set-face-background 'hl-line "#FFF3D9") ; #3e4446 #505050
- ;;(evil-normal-state-cursor ' (box "#000000")) ; black
- ; (set-face-background 'hl-line "#FFF3D9") ; #3e4446 #505050
- ;; (spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  ;;(set-face-background 'hl-line "#FFF3D9") ; #3e4446 #505050
+  ;;(evil-normal-state-cursor ' (box "#000000")) ; black
+                                        ; (set-face-background 'hl-line "#FFF3D9") ; #3e4446 #505050
+  ;; (spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 
- (custom-set-faces
-  '(company-tooltip-common
-    ((t (:inherit company-tooltip :weight bold :underline nil))))
-  '(company-tooltip-common-selection
-    ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+  (custom-set-faces
+   '(company-tooltip-common
+     ((t (:inherit company-tooltip :weight bold :underline nil))))
+   '(company-tooltip-common-selection
+     ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 
-; (set-face-attribute 'hl-line nil :inherit nil :background "gray80") ;; highlight line with the cursor, preserving the colours.;; highlight line with the cursor, preserving the colours.;; highlight line with the cursor, preserving the colours.;; highlight line with the cursor, preserving the colours.
-; (global-hl-line-mode 1)
+                                        ; (set-face-attribute 'hl-line nil :inherit nil :background "gray80") ;; highlight line with the cursor, preserving the colours.;; highlight line with the cursor, preserving the colours.;; highlight line with the cursor, preserving the colours.;; highlight line with the cursor, preserving the colours.
+                                        ; (global-hl-line-mode 1)
 
-  (require 'dim) ;; this has to be loaded before sml
+  ;;(require 'dim) ;; this has to be loaded before sml
   (dim-major-names '(
-     (emacs-lisp-mode " λ" elisp-mode)
-     ;(inferior-emacs-lisp-mode  " ⋘λ")
-    ; (calendar-mode " cal" calendar)
-    ; (ahk-mode " ahk" ahk-mode)
-     ))
+                     (emacs-lisp-mode " λ" elisp-mode)
+                                        ;(inferior-emacs-lisp-mode  " ⋘λ")
+                                        ; (calendar-mode " cal" calendar)
+                                        ; (ahk-mode " ahk" ahk-mode)
+                     ))
   (dim-minor-names
    '(
      (anzu-mode " ᵃⁿᶻ" anzu)
@@ -883,8 +886,8 @@ before packages are loaded."
      (undo-tree-mode " ←" undo-tree)
      (auto-highlight-symbol-mode "" auto-highlight-symbol)
      (hs-minor-mode "" hideshow)
-     ;(smartparens-mode "" smartparens)
-     ;(highligt-parenthesis-mode "" highlight-parentheses)
+                                        ;(smartparens-mode "" smartparens)
+                                        ;(highligt-parenthesis-mode "" highlight-parentheses)
      (yas-minor-mode " ʸᵃˢ" yasnippet)
      (golden-ratio-mode " ¹φ⁶" golden-ratio)
      (google-this-mode " g" google-this)
@@ -898,20 +901,32 @@ before packages are loaded."
      (auto-fill-function " ↵" simple)
      (eldoc-mode  ""    eldoc)
      (whitespace-mode    " ·"  whitespace)
-     ;(paredit-mode       " (" paredit)
+     ;;(mini-modeline-mode    " m" minimode)
+     ;;(paredit-mode       " (" paredit)
      ))
+
+  ;; this works / howto:
+  ;; 1 put spaceline in excluded
+  ;; 2 put smart-mode-line and mini-modeline in additional
+  ;; 3 SPC f e R after init
+  (setq sml/show-frame-identification nil)
+  (setq sml/theme 'dark)
   (setq sml/no-confirm-load-theme t)
   (setq size-indication-mode t)
-  (require 'smart-mode-line)
+  ;;(require 'smart-mode-line)
   (sml/setup)
-  ;; this works, just SPC f e R
+
+  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/orgFiles/" ":orgFiles:") t)
+  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/ahkFiles/" ":ahkFiles:") t)
+  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/nixFiles/" ":nixFiles:") t)
+  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/latexFiles/" ":texFiles:") t)
+  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/" ":db:") t)
+  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/google drive/" ":gd:") t)
   ;; (setq powerline-arrow-shape 'curve)
   ;; (setq powerline-default-separator-dir '(right . left))
   ;; (setq sml/theme 'powerline)
-;;  (setq sml/no-confirm-load-theme t)
-;;  (sml/setup)
-;;  (setq sml/replacer-regexp-list '((".+" "")))
-;;  (setq sml/theme 'dark)
+  ;;  (setq sml/no-confirm-load-theme t)
+  ;;  (setq sml/replacer-regexp-list '((".+" "")))
 
   ;;  ;; I'm activating mini-modeline after smart-mode-line
   ;;  (use-package mini-modeline
@@ -919,18 +934,9 @@ before packages are loaded."
   ;;    :after smart-mode-line
   ;;    :config
   ;;    )
-    (require 'mini-modeline)
-    ;;(setq mini-modeline-mode t)
-    (mini-modeline-mode 1)
-
-  ;;  (sml/show-frame-identification nil)
-  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/orgFiles/" ":orgFiles:") t)
-  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/ahkFiles/" ":ahkFiles:") t)
-  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/nixFiles/" ":nixFiles:") t)
-  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/latexFiles/" ":texFiles:") t)
-  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/Dropbox/" ":db:") t)
-  ;;(add-to-list 'sml/replacer-regexp-list '("C:/users/chris/google drive/" ":gd:") t)
-
+  (require 'mini-modeline)
+  ;;(setq mini-modeline-mode t)
+  (mini-modeline-mode 1)
 
   ;;(setq ns-pop-up-frames nil) ;; ¬open new instance of emacs with ‘open with...’
   ;;(custom-set-variables '(pop-up-frames nil))
@@ -939,28 +945,30 @@ before packages are loaded."
   ;; (spaceline-workspace-numbers-unicode t)
   ;; (spaceline-window-numbers-unicode t)
 
-;; USER BINDINGS ________________________________________________________________________
+  ;; USER BINDINGS ________________________________________________________________________
 
   ;; wanting tab to behave properly, but no
-;;  (setq-default indent-tabs-mode nil)
-;;  (setq-default tab-width 4)
-;;  (setq indent-line-function 'insert-tab)
+  ;;  (setq-default indent-tabs-mode nil)
+  ;;  (setq-default tab-width 4)
+  ;;  (setq indent-line-function 'insert-tab)
 
   (spacemacs/declare-prefix "o" "custom")
   (spacemacs/set-leader-keys "or" 'recover-this-file)
   (spacemacs/set-leader-keys "og" 'helm-google-suggest)
   (spacemacs/set-leader-keys "on" 'google-this-noconfirm)
   (spacemacs/set-leader-keys "ov" 'visual-line-mode)
+  (spacemacs/set-leader-keys "os" 'powerthesaurus-lookup-synonyms-dwim)
   ;; (spacemacs/set-leader-keys "oc" 'my-horizontal-recenter)
   (spacemacs/set-leader-keys "op" 'spacemacs/org-agenda-transient-state/org-agenda-priority)
   (global-set-key (kbd "C-S-l") 'my-horizontal-recenter)
-  ;(global-set-key (kbd "M-,") 'comment-dwim)
+  (global-set-key (kbd "M-f4") 'save-buffers-kill-emacs)
+                                        ;(global-set-key (kbd "M-,") 'comment-dwim)
   ;; (global-set-key (kbd "C-c C-c") 'google-this-word) ; ¬in org, needs to be unbound first?
   ;;(global-set-key (kbd "backTAB") 'hippie-expand) ;; makes yas expand with s-tab
 
-  ; Revert vim-surround's `s' and `S' to act like Vim defaults
-  ;(evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
-  ;(evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
+                                        ; Revert vim-surround's `s' and `S' to act like Vim defaults
+                                        ;(evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
+                                        ;(evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
 
 
   ;; Multiple cursors
@@ -986,7 +994,7 @@ This function is called at the very end of Spacemacs initialization."
  '(custom-safe-themes
    '("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(package-selected-packages
-   '(mini-modeline ranger nov esxml kv engine-mode djvu3 djvu zetteldeft helpful elisp-refs flycheck-pos-tip deft centaur-tabs pdf-view-restore pdf-tools tablist math-symbol-lists auctex fzf powerthesaurus elfeed-org elfeed-goodies ace-jump-mode noflet elfeed web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode lsp-treemacs bui lsp-mode markdown-mode cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic persistent-scratch unfill mwim flyspell-popup flyspell-correct-helm flyspell-correct auto-dictionary yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company-nixos-options company auto-yasnippet yasnippet ac-ispell auto-complete org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink htmlize helm-org-rifle gnuplot evil-org ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil treemacs cfrs pfuture posframe toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons memoize all-the-icons spaceline powerline restart-emacs request rainbow-delimiters quickrun popwin persp-mode password-generator paradox spinner overseer org-superstar open-junk-file nameless multi-line shut-up macrostep lorem-ipsum link-hint inspector info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl flycheck-elsa flx-ido flx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection annalist evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu emr iedit clang-format projectile paredit list-utils elisp-slime-nav editorconfig dumb-jump s drag-stuff dired-quick-sort define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol ht dash auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el hydra lv hybrid-mode font-lock+ evil goto-chg dotenv-mode diminish bind-map bind-key async))
+   '(grandshell-theme mini-modeline ranger nov esxml kv engine-mode djvu3 djvu zetteldeft helpful elisp-refs flycheck-pos-tip deft centaur-tabs pdf-view-restore pdf-tools tablist math-symbol-lists auctex fzf powerthesaurus elfeed-org elfeed-goodies ace-jump-mode noflet elfeed web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode lsp-treemacs bui lsp-mode markdown-mode cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic persistent-scratch unfill mwim flyspell-popup flyspell-correct-helm flyspell-correct auto-dictionary yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company-nixos-options company auto-yasnippet yasnippet ac-ispell auto-complete org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink htmlize helm-org-rifle gnuplot evil-org ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil treemacs cfrs pfuture posframe toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons memoize all-the-icons spaceline powerline restart-emacs request rainbow-delimiters quickrun popwin persp-mode password-generator paradox spinner overseer org-superstar open-junk-file nameless multi-line shut-up macrostep lorem-ipsum link-hint inspector info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl flycheck-elsa flx-ido flx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection annalist evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu emr iedit clang-format projectile paredit list-utils elisp-slime-nav editorconfig dumb-jump s drag-stuff dired-quick-sort define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol ht dash auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el hydra lv hybrid-mode font-lock+ evil goto-chg dotenv-mode diminish bind-map bind-key async))
  '(warning-suppress-types '(((evil-collection)) ((evil-collection)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

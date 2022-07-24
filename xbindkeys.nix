@@ -3,11 +3,18 @@
 environment.etc."/user/u/.xbindkeysrc".text = ''
 
 ###########################################################################################
+# after modifying script, reload it by running 1. killall xbindkeys, 2. xbindkeys
+
+"bash /etc/user/u/sysconf/scripts/mpvHover.sh"
+  m:0x0 + c:70 #f4
+
+"bash /etc/user/u/sysconf/scripts/mpvTitlebar.sh"
+ m:0x0 + c:74 #F8
 
 # open file
 #"xdg-open ~/sysconf/configuration.nix"
-"firefox"
-  m:0x0 + c:73
+#"firefox"
+  #m:0x0 + c:73
 
 # The format of a command line is:
 #    "command to start"

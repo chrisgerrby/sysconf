@@ -62,18 +62,18 @@
   # 1 beg
   # imports = [ <nixos-hardware/microsoft/surface> ]
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  nixpkgs.config.packageOverrides = pkgs: {
-        vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-      };
-      hardware.opengl = {
-        enable = true;
-        extraPackages = with pkgs; [
-          vaapiIntel
-          vaapiVdpau
-          libvdpau-va-gl
-          intel-media-driver
-        ];
-      };
+#  nixpkgs.config.packageOverrides = pkgs: {
+#        vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+#      };
+#      hardware.opengl = {
+#        enable = true;
+#        extraPackages = with pkgs; [
+#          vaapiIntel
+#          vaapiVdpau
+#          libvdpau-va-gl
+#          intel-media-driver
+#        ];
+#      };
   # 1 end
   # boot.kernelPackages = pkgs.linuxPackages_4_19;
   # boot.kernelPackages = [ surface ];
@@ -199,11 +199,11 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
   # services.printing.enable = true; # Enable CUPS to print documents.
 
   sound.enable = true;
-#  hardware.pulseaudio = {
-#    enable = true;
-#    extraModules = [ pkgs.pulseaudio-modules-bt ];
-#    package = pkgs.pulseaudioFull;
-#  };
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
   hardware.bluetooth.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.root.hashedPassword = "$6$OO/d1fIDgXpFZ7$Urtt2Wl.QgQW4Pfu4aF49D05ZyJPYvpLu3RIjxiwg1zsCLn0kceP9I7594VIDGSZxBcG4uJs8WxCTilmqgmdN0";
@@ -240,9 +240,12 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
    gnomeExtensions.toggle-night-light
    gnomeExtensions.night-light-slider
    #emacs27Packages.lsp-latex   emacs27Packages.lsp-mode   emacs27Packages.lsp-ui    emacs27Packages.helm-lsp
+   emacs27Packages.auctex-latexmk
+   auctex
+   emacs27Packages.auctex
    emacs27Packages.company-auctex
+   emacs27Packages.latex-extra
    arcan.espeak
-   pcloud
    notepadqq
    cheat navi # howdoi how2 eg cht-sh
    # firejail
@@ -267,8 +270,9 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     bitwarden monero-gui
     #entr tmux tldr maim
     fzf bat exa ripgrep-all
-    #sxhkd xbindkeys xvkbd xdotool
-    #xclip copyq parcellite
+    # x keboard extention arch wiki 
+    xclip xdotool xbindkeys # sxhkd xvkbd 
+    #copyq parcellite
     #ananmesis
     ####### automation
     # inotify-tools
@@ -310,8 +314,8 @@ environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.g
     #udevil # mount fs w/o pw
     unzip
     doge alacritty kitty-doge  #putty cool-retro-term
-    mpv mps-youtube #youtube-dl
-    sxiv feh #aria2 rtorrent
+    mpv youtube-dl # mps-youtube 
+    feh #aria2 rtorrent
     nix-prefetch-github   nix-index    nix-prefetch-scripts
   ];
 
